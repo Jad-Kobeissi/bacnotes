@@ -12,3 +12,6 @@ body {
 @theme {
   --breakpoint-landing-md: 650px;
 }
+html {
+  scroll-behavior: smooth;
+}
