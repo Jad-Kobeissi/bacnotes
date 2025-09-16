@@ -40,6 +40,7 @@ function Home() {
       id="home"
       initial={{ opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
+      exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.3 }}
       ref={ref}
     >
@@ -58,6 +59,13 @@ function Home() {
             onClick={() => router.push("/signup")}
           >
             Get Started Now
+          </button>
+          <h1 className="text-[1.5rem] font-bold">OR</h1>
+          <button
+            className="text-[1.5rem] rounded-xl bg-[#141414] font-bold px-4 py-2  whitespace-nowrap"
+            onClick={() => router.push("/signup")}
+          >
+            LogIn
           </button>
         </div>
       </div>
@@ -79,6 +87,7 @@ function About() {
       initial={{ opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.3 }}
+      exit={{ opacity: 0, y: -20 }}
       ref={ref}
     >
       <h1 className="md:text-[3rem] text-[2.5rem] font-bold text-center">
@@ -114,6 +123,7 @@ function Card({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
+      exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.3 }}
       ref={ref}
       className="bg-[#141414] w-[250px] h-fit rounded-md flex flex-col items-center justify-center"
