@@ -1,5 +1,5 @@
 "use client";
-import { use, useEffect, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import { UseUser } from "../contexts/UserContext";
 import { TPost, TUser } from "../types";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -34,6 +34,20 @@ export default function Home() {
       .catch((err) => {
         setError(err.response.data);
         setHasMore(false);
+      });
+  };
+  const deletePost = async (id: string) => {
+    axios
+      .delete(`/api/posts/${id}`, {
+        headers: {
+          Authorization: `Bearer ${getCookie("token")}`,
+        },
+      })
+      .then(() => {
+        window.location.reload();
+      })
+      .catch((err) => {
+        setError(err.response.data);
       });
   };
   useEffect(() => {
@@ -87,6 +101,16 @@ export default function Home() {
                   className="snap-center"
                 />
               ))}
+            </div>
+            <div className="flex items-center justify-center mt-[3vh]">
+              <button
+                className="bg-[#ce1a35] text-[1.3rem] font-bold px-4 py-1 rounded-lg"
+                onClick={() => {
+                  deletePost(post.id as string);
+                }}
+              >
+                Delete
+              </button>
             </div>
           </div>
         ))}

@@ -4,6 +4,7 @@ import { Nav } from "../Nav";
 import axios from "axios";
 import Loading from "../Loading";
 import { Error } from "../Error";
+import { getCookie } from "cookies-next";
 
 export default function Add() {
   const [loading, setLoading] = useState(false);
@@ -11,6 +12,7 @@ export default function Add() {
   const title = useRef<HTMLInputElement>(null);
   const description = useRef<HTMLInputElement>(null);
   const files = useRef<HTMLInputElement>(null);
+  const [selected, setSelected] = useState("");
   return (
     <>
       <Nav />
@@ -22,13 +24,19 @@ export default function Add() {
           onSubmit={(e) => {
             e.preventDefault();
             setLoading(true);
+            setError("");
             const formData = new FormData();
             formData.append("title", title.current!.value);
             formData.append("description", description.current!.value);
+            formData.append("subject", selected);
             const filesArray = Array.from(files.current!.files || []);
             filesArray.forEach((file) => formData.append("files", file));
             axios
-              .post("/api/posts", formData)
+              .post("/api/posts", formData, {
+                headers: {
+                  Authorization: `Bearer ${getCookie("token")}`,
+                },
+              })
               .then((res) => {
                 alert("User Posted");
               })
@@ -65,6 +73,25 @@ export default function Add() {
               id="description"
               className="px-4 py-2 rounded text-[1.3rem] bg-[#121212]"
             />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="subject" className="text-[#d9d9d9cc]">
+              Subject
+            </label>
+            <select
+              className="bg-[#121212] px-4 py-2 rounded-lg"
+              id="subject"
+              value={selected}
+              onChange={(e) => {
+                setSelected(e.target.value);
+              }}
+            >
+              <option value="">Select Value</option>
+              <option value="english">English</option>
+              <option value="arabic">Arabic</option>
+              <option value="french">French</option>
+              <option value="physics">Physics</option>
+            </select>
           </div>
           <div className="flex flex-col">
             <label htmlFor="files" className="text-[#d9d9d9cc]">
