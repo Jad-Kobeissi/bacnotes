@@ -16,7 +16,7 @@ function Nav() {
           <Link href={"#home"}>Home</Link>
           <span className="bg-[#d9d9d9] w-0 h-0.5 bottom-0 left-0 absolute group-hover:w-full group-focus:w-full group-active:w-full transition-all duration-200"></span>
         </div>
-        <div>
+        <div className="group relative">
           <Link href={"#about"}>About</Link>
           <span className="bg-[#d9d9d9] w-0 h-0.5 bottom-0 left-0 absolute group-hover:w-full group-focus:w-full group-active:w-full transition-all duration-200"></span>
         </div>
@@ -63,7 +63,7 @@ function Home() {
           <h1 className="text-[1.5rem] font-bold">OR</h1>
           <button
             className="text-[1.5rem] rounded-xl bg-[#141414] font-bold px-4 py-2  whitespace-nowrap"
-            onClick={() => router.push("/signup")}
+            onClick={() => router.push("/login")}
           >
             LogIn
           </button>
