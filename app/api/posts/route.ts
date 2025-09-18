@@ -99,8 +99,27 @@ export async function POST(req: Request) {
         imageUrls: filesArray as string[],
       },
     });
+    const updatedUser = await prisma.user.update({
+      where: {
+        id: decoded.id,
+      },
+      data: {
+        points: {
+          increment: 1,
+        },
+        rating: {
+          increment: 10,
+        },
+      },
+      include: {
+        posts: true,
+        followers: true,
+        following: true,
+        likedPosts: true,
+      },
+    });
 
-    return new Response("post created");
+    return Response.json(updatedUser);
   } catch (error: any) {
     return new Response(error, { status: 500 });
   }

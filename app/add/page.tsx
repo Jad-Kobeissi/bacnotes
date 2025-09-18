@@ -5,6 +5,7 @@ import axios from "axios";
 import Loading from "../Loading";
 import { Error } from "../Error";
 import { getCookie } from "cookies-next";
+import { UseUser } from "../contexts/UserContext";
 
 export default function Add() {
   const [loading, setLoading] = useState(false);
@@ -13,6 +14,7 @@ export default function Add() {
   const description = useRef<HTMLInputElement>(null);
   const files = useRef<HTMLInputElement>(null);
   const [selected, setSelected] = useState("");
+  const { setUser } = UseUser();
   return (
     <>
       <Nav />
@@ -38,6 +40,7 @@ export default function Add() {
                 },
               })
               .then((res) => {
+                setUser(res.data);
                 alert("User Posted");
               })
               .catch((err) => {

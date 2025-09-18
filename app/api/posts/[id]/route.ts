@@ -17,7 +17,14 @@ export async function GET(
     const post = await prisma.post.findUnique({
       where: { id },
       include: {
-        author: true,
+        author: {
+          include: {
+            followers: true,
+            following: true,
+            likedPosts: true,
+            posts: true,
+          },
+        },
         likedUsers: true,
       },
     });
@@ -59,8 +66,27 @@ export async function DELETE(
       const imageUrl = ref(storage, url);
       await deleteObject(imageUrl);
     });
+    const updatedUser = await prisma.user.update({
+      where: {
+        id: decoded.id,
+      },
+      data: {
+        points: {
+          decrement: 1,
+        },
+        rating: {
+          decrement: 10,
+        },
+      },
+      include: {
+        followers: true,
+        following: true,
+        likedPosts: true,
+        posts: true,
+      },
+    });
 
-    return Response.json(post);
+    return Response.json(updatedUser);
   } catch (error: any) {
     return new Response(error, { status: 500 });
   }

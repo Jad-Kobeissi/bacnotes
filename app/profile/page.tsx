@@ -17,6 +17,7 @@ export default function Home() {
   const [hasMore, setHasMore] = useState(true);
   const [posts, setPosts] = useState<TPost[]>([]);
   const [page, setPage] = useState(1);
+  const { setUser } = UseUser();
   const fetchPosts = async () => {
     await axios
       .get(`/api/posts/user/${mainUser?.id}?page=${page}`, {
@@ -43,7 +44,8 @@ export default function Home() {
           Authorization: `Bearer ${getCookie("token")}`,
         },
       })
-      .then(() => {
+      .then((res) => {
+        setUser(res.data);
         window.location.reload();
       })
       .catch((err) => {
@@ -69,6 +71,10 @@ export default function Home() {
         <h1 className="text-[2rem] font-bold capitalize">
           {mainUser?.username}
         </h1>
+        <div className="text-[#6d6d6d] font-bold flex gap-[1rem]">
+          <h1>Rating: {String(mainUser?.rating)}</h1>
+          <h1>User Points: {String(mainUser?.points)}</h1>
+        </div>
         <div className="flex gap-[1rem] text-[#6d6d6dcc]">
           <h1>Followers: {mainUser?.followers.length}</h1>
           <h1>Following: {mainUser?.following.length}</h1>

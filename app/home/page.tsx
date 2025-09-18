@@ -28,13 +28,15 @@ export default function Home() {
         setPage((prev) => {
           return prev + 1;
         });
-        console.log(res.data);
       })
       .catch((err) => {
         setError(err.response.data);
         setHasMore(false);
       });
   };
+  useEffect(() => {
+    fetchPosts();
+  }, []);
   return (
     <>
       <Nav />
