@@ -8,9 +8,11 @@ import axios from "axios";
 import { Error } from "../Error";
 import { getCookie } from "cookies-next";
 import { Nav } from "../Nav";
+import Post from "../Post";
 
 export default function Home() {
   const { user } = UseUser();
+  const [mainUser, setMainUser] = useState<TUser | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [hasMore, setHasMore] = useState(true);
@@ -37,40 +39,31 @@ export default function Home() {
   useEffect(() => {
     fetchPosts();
   }, []);
+  useEffect(() => {
+    if (user) {
+      setMainUser(user);
+    }
+  }, [user]);
   return (
     <>
       <Nav />
-      <InfiniteScroll
-        dataLength={posts.length}
-        hasMore={hasMore}
-        loader={
-          <Loading className="flex items-center justify-center mt-[30vh]" />
-        }
-        next={fetchPosts}
-        className="flex items-center flex-col gap-[5vh] mt-[10vh]"
-      >
-        {posts.map((post) => (
-          <div
-            className="bg-[#141414] w-fit h-fit rounded-xl p-[2rem]"
-            key={post.id as string}
-          >
-            <h1>Username: {post.author.username}</h1>
-            <h1 className="text-[1.5rem] capitalize font-bold">{post.title}</h1>
-            <p>{post.description}</p>
-            <p className="text-[#6d6d6d]">{post.subject}</p>
-            <div className="overflow-x-scroll snap-x snap-mandatory flex landing-md:w-[30rem] w-[17rem]">
-              {post.imageUrls.map((url) => (
-                <img
-                  key={url as string}
-                  src={url as string}
-                  alt={post.title as string}
-                  className="snap-center"
-                />
-              ))}
-            </div>
-          </div>
-        ))}
-      </InfiniteScroll>
+      {mainUser == null ? (
+        <Loading className="w-screen h-screen flex items-center justify-center" />
+      ) : (
+        <InfiniteScroll
+          dataLength={posts.length}
+          hasMore={hasMore}
+          loader={
+            <Loading className="flex items-center justify-center mt-[30vh]" />
+          }
+          next={fetchPosts}
+          className="flex items-center flex-col gap-[5vh] mt-[10vh]"
+        >
+          {posts.map((post) => (
+            <Post post={post} User={mainUser} key={post.id as string} />
+          ))}
+        </InfiniteScroll>
+      )}
       {error && <Error error={error} className="text-[2rem] text-center" />}
     </>
   );

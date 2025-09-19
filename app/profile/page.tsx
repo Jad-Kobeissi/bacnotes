@@ -8,8 +8,9 @@ import axios from "axios";
 import { Error } from "../Error";
 import { getCookie } from "cookies-next";
 import { Nav } from "../Nav";
+import Post from "../Post";
 
-export default function Home() {
+export default function Profile() {
   const { user } = UseUser();
   const [mainUser, setMainUser] = useState<TUser | null>();
   const [loading, setLoading] = useState(true);
@@ -17,7 +18,6 @@ export default function Home() {
   const [hasMore, setHasMore] = useState(true);
   const [posts, setPosts] = useState<TPost[]>([]);
   const [page, setPage] = useState(1);
-  const { setUser } = UseUser();
   const fetchPosts = async () => {
     await axios
       .get(`/api/posts/user/${mainUser?.id}?page=${page}`, {
@@ -35,21 +35,6 @@ export default function Home() {
       .catch((err) => {
         setError(err.response.data);
         setHasMore(false);
-      });
-  };
-  const deletePost = async (id: string) => {
-    axios
-      .delete(`/api/posts/${id}`, {
-        headers: {
-          Authorization: `Bearer ${getCookie("token")}`,
-        },
-      })
-      .then((res) => {
-        setUser(res.data);
-        window.location.reload();
-      })
-      .catch((err) => {
-        setError(err.response.data);
       });
   };
   useEffect(() => {
@@ -90,35 +75,7 @@ export default function Home() {
         className="flex items-center flex-col gap-[5vh] mt-[10vh]"
       >
         {posts.map((post) => (
-          <div
-            className="bg-[#141414] w-fit h-fit rounded-xl p-[2rem]"
-            key={post.id as string}
-          >
-            <h1>Username: {post.author.username}</h1>
-            <h1 className="text-[1.5rem] capitalize font-bold">{post.title}</h1>
-            <p>{post.description}</p>
-            <p className="text-[#6d6d6d]">{post.subject}</p>
-            <div className="overflow-x-scroll snap-x snap-mandatory flex landing-md:w-[30rem] w-[17rem]">
-              {post.imageUrls.map((url) => (
-                <img
-                  key={url as string}
-                  src={url as string}
-                  alt={post.title as string}
-                  className="snap-center"
-                />
-              ))}
-            </div>
-            <div className="flex items-center justify-center mt-[3vh]">
-              <button
-                className="bg-[#ce1a35] text-[1.3rem] font-bold px-4 py-1 rounded-lg"
-                onClick={() => {
-                  deletePost(post.id as string);
-                }}
-              >
-                Delete
-              </button>
-            </div>
-          </div>
+          <Post key={post.id as string} post={post} User={mainUser as TUser} />
         ))}
       </InfiniteScroll>
       {error && <Error error={error} className="text-[2rem] text-center" />}
