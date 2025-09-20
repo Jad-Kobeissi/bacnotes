@@ -22,7 +22,12 @@ export async function GET(req: Request) {
         },
       },
       include: {
-        author: true,
+        author: {
+          include: {
+            followers: true,
+            following: true,
+          },
+        },
         likedUsers: true,
       },
       skip: skip,

@@ -4,14 +4,26 @@ import { UseUser } from "./contexts/UserContext";
 import axios from "axios";
 import { getCookie } from "cookies-next";
 
-export default function Post({ post, User }: { post: TPost; User: TUser }) {
+export default function Post({
+  post,
+  User,
+  profilePage,
+}: {
+  post: TPost;
+  User: TUser;
+  profilePage: boolean;
+}) {
   const [liked, setLiked] = useState<boolean>(false);
+  const [followed, setFollowed] = useState<boolean>(false);
   const { setUser } = UseUser();
   useEffect(() => {
     if (post.likedUsers.some((u) => u.id == User.id)) {
       setLiked(true);
     }
-  }, [User.likedPosts]);
+    if (post.author.followers.some((u) => u.id == User.id)) {
+      setFollowed(true);
+    }
+  }, [User]);
   const deletePost = async (id: string) => {
     axios
       .delete(`/api/posts/${id}`, {
@@ -29,7 +41,49 @@ export default function Post({ post, User }: { post: TPost; User: TUser }) {
       className="bg-[#141414] w-fit h-fit rounded-xl p-[2rem] flex flex-col items-center"
       key={post.id as string}
     >
-      <h1>Username: {post.author.username}</h1>
+      <div className="flex gap-[1rem]">
+        <h1 className="text-[1.5rem] font-bold">{post.author.username}</h1>
+        {!profilePage &&
+          (followed ? (
+            <button
+              onClick={() => {
+                setFollowed(false);
+                axios.post(
+                  `/api/user/unfollow/${post.authorId}`,
+                  {},
+                  {
+                    headers: {
+                      Authorization: `Bearer ${getCookie("token")}`,
+                    },
+                  }
+                );
+              }}
+              className="bg-[#1C6CA0] text-white font-bold px-4 py-2 rounded-xl hover:bg-transparent border-[#1C6CA0] active:bg-transparent border transition-all duration-150"
+            >
+              Unfollow
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                axios
+                  .post(
+                    `/api/user/follow/${post.authorId}`,
+                    {},
+                    {
+                      headers: {
+                        Authorization: `Bearer ${getCookie("token")}`,
+                      },
+                    }
+                  )
+                  .catch((err) => console.log(err));
+                setFollowed(true);
+              }}
+              className="bg-[#1C6CA0] text-white font-bold px-4 py-2 rounded-xl hover:bg-transparent border-[#1C6CA0] active:bg-transparent border transition-all duration-150"
+            >
+              Follow
+            </button>
+          ))}
+      </div>
       <h1 className="text-[1.5rem] capitalize font-bold">{post.title}</h1>
       <p>{post.description}</p>
       <p className="text-[#6d6d6d]">{post.subject}</p>
@@ -43,43 +97,46 @@ export default function Post({ post, User }: { post: TPost; User: TUser }) {
           />
         ))}
       </div>
-      {liked ? (
-        <button
-          onClick={() => {
-            setLiked(false);
-            axios.post(
-              `/api/posts/dislike/${post.id}`,
-              {},
-              {
-                headers: {
-                  Authorization: `Bearer ${getCookie("token")}`,
-                },
-              }
-            );
-          }}
-          className="bg-[#1C6CA0] text-white font-bold px-4 py-2 rounded-xl hover:bg-transparent border-[#1C6CA0] active:bg-transparent border transition-all duration-150"
-        >
-          Dislike
-        </button>
-      ) : (
-        <button
-          onClick={() => {
-            axios.post(
-              `/api/posts/like/${post.id}`,
-              {},
-              {
-                headers: {
-                  Authorization: `Bearer ${getCookie("token")}`,
-                },
-              }
-            );
-            setLiked(true);
-          }}
-          className="bg-[#1C6CA0] text-white font-bold px-4 py-2 rounded-xl hover:bg-transparent border-[#1C6CA0] active:bg-transparent border transition-all duration-150"
-        >
-          Like
-        </button>
-      )}
+      <div className="flex items-center justify-center gap-[1rem]">
+        <h1 className="text-[1.2rem] font-bold">{String(post.likes)}</h1>
+        {liked ? (
+          <button
+            onClick={() => {
+              setLiked(false);
+              axios.post(
+                `/api/posts/dislike/${post.id}`,
+                {},
+                {
+                  headers: {
+                    Authorization: `Bearer ${getCookie("token")}`,
+                  },
+                }
+              );
+            }}
+            className="bg-[#1C6CA0] text-white font-bold px-4 py-2 rounded-xl hover:bg-transparent border-[#1C6CA0] active:bg-transparent border transition-all duration-150"
+          >
+            Dislike
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              axios.post(
+                `/api/posts/like/${post.id}`,
+                {},
+                {
+                  headers: {
+                    Authorization: `Bearer ${getCookie("token")}`,
+                  },
+                }
+              );
+              setLiked(true);
+            }}
+            className="bg-[#1C6CA0] text-white font-bold px-4 py-2 rounded-xl hover:bg-transparent border-[#1C6CA0] active:bg-transparent border transition-all duration-150"
+          >
+            Like
+          </button>
+        )}
+      </div>
       {User.id == post.authorId && (
         <div className="flex items-center justify-center mt-[3vh]">
           <button

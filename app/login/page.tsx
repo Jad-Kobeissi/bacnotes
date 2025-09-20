@@ -50,7 +50,7 @@ export default function LogIn() {
         <h1 className="text-[2.5rem] font-bold">LogIn</h1>
         {error && <Error error={error} />}
         <div className="flex flex-col">
-          <label htmlFor="username" className="text-[#d9d9d9cc]">
+          <label htmlFor="username" className="text-[#6d6d66d]">
             Username
           </label>
           <input
@@ -62,7 +62,7 @@ export default function LogIn() {
           />
         </div>
         <div className="flex flex-col">
-          <label htmlFor="password" className="text-[#d9d9d9cc]">
+          <label htmlFor="password" className="text-[#6d6d66d]">
             Password
           </label>
           <input

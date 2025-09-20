@@ -41,7 +41,14 @@ export async function POST(
         },
       },
     });
-
+    await prisma.user.update({
+      where: {
+        id: post.authorId,
+      },
+      data: {
+        rating: 5,
+      },
+    });
     return Response.json(post);
   } catch (error: any) {
     console.log(error);

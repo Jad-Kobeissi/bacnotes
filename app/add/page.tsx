@@ -54,7 +54,7 @@ export default function Add() {
           <h1 className="text-[2rem] font-bold">Add</h1>
           {error && <Error error={error} />}
           <div className="flex flex-col">
-            <label htmlFor="title" className="text-[#d9d9d9cc]">
+            <label htmlFor="title" className="text-[#6d6d66d]">
               Title
             </label>
             <input
@@ -66,7 +66,7 @@ export default function Add() {
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="description" className="text-[#d9d9d9cc]">
+            <label htmlFor="description" className="text-[#6d6d66d]">
               Description
             </label>
             <input
@@ -78,7 +78,7 @@ export default function Add() {
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="subject" className="text-[#d9d9d9cc]">
+            <label htmlFor="subject" className="text-[#6d6d66d]">
               Subject
             </label>
             <select
@@ -97,7 +97,7 @@ export default function Add() {
             </select>
           </div>
           <div className="flex flex-col">
-            <label htmlFor="files" className="text-[#d9d9d9cc]">
+            <label htmlFor="files" className="text-[#6d6d66d]">
               Images
             </label>
             <input

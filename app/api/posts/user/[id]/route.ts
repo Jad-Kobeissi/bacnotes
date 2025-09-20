@@ -23,7 +23,12 @@ export async function GET(
         },
       },
       include: {
-        author: true,
+        author: {
+          include: {
+            followers: true,
+            following: true,
+          },
+        },
         likedUsers: true,
       },
       skip: skip,

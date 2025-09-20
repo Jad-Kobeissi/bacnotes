@@ -48,7 +48,7 @@ function Home() {
         <h1 className="text-[3rem] font-bold text-center landing-md:text-left">
           Welcome To Bacnotes
         </h1>
-        <p className="text-[#d9d9d9cc] text-center landing-md:text-left">
+        <p className="text-[#6d6d66d] text-center landing-md:text-left">
           Share, discover, and collaborate on notes with your classmates. This
           app is BAC students’ private space to upload notes, access helpful
           resources, and support each other throughout the school year.
@@ -131,7 +131,7 @@ function Card({
       <Svg />
       <div className="ml-[1vw]">
         <h1 className="capitalize text-[1.3rem] font-bold">{title}</h1>
-        <p className="text-[#d9d9d9cc]">{description}</p>
+        <p className="text-[#6d6d66d]">{description}</p>
       </div>
     </motion.div>
   );

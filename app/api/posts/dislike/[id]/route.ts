@@ -41,6 +41,16 @@ export async function POST(
         },
       },
     });
+    await prisma.user.update({
+      where: {
+        id: post.authorId,
+      },
+      data: {
+        rating: {
+          decrement: 5,
+        },
+      },
+    });
 
     return Response.json(post);
   } catch (error: any) {

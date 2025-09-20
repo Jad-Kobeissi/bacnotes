@@ -13,7 +13,6 @@ import Post from "../Post";
 export default function Profile() {
   const { user } = UseUser();
   const [mainUser, setMainUser] = useState<TUser | null>();
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [hasMore, setHasMore] = useState(true);
   const [posts, setPosts] = useState<TPost[]>([]);
@@ -75,7 +74,12 @@ export default function Profile() {
         className="flex items-center flex-col gap-[5vh] mt-[10vh]"
       >
         {posts.map((post) => (
-          <Post key={post.id as string} post={post} User={mainUser as TUser} />
+          <Post
+            key={post.id as string}
+            post={post}
+            User={mainUser as TUser}
+            profilePage={true}
+          />
         ))}
       </InfiniteScroll>
       {error && <Error error={error} className="text-[2rem] text-center" />}

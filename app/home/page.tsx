@@ -60,7 +60,12 @@ export default function Home() {
           className="flex items-center flex-col gap-[5vh] mt-[10vh]"
         >
           {posts.map((post) => (
-            <Post post={post} User={mainUser} key={post.id as string} />
+            <Post
+              post={post}
+              User={mainUser}
+              key={post.id as string}
+              profilePage={false}
+            />
           ))}
         </InfiniteScroll>
       )}
