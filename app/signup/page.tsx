@@ -6,6 +6,7 @@ import axios from "axios";
 import { setCookie } from "cookies-next";
 import { UseUser } from "../contexts/UserContext";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Signup() {
   const username = useRef<HTMLInputElement>(null);
@@ -83,6 +84,10 @@ export default function Signup() {
             ref={grade}
             className="bg-[#121212] py-2 px-4 text-[1.3rem] rounded"
           />
+        </div>
+        <div className="relative group">
+          <Link href={"/login"}>Already Have An Account? LogIn Here</Link>
+          <div className="h-0.5 w-0 bg-[#d9d9d9] absolute bottom-0 left-0 group-hover:w-full transition-all duration-150"></div>
         </div>
         <button className="bg-[#1C6CA0] text-[#d9d9d9] px-5 py-1 rounded mt-4 text-[1.3rem] font-bold">
           SignUp
