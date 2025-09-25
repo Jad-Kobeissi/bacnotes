@@ -14,6 +14,7 @@ export default function Post({
   profilePage: boolean;
 }) {
   const [liked, setLiked] = useState<boolean>(false);
+  const [likes, setLikes] = useState<number>(post.likes as number);
   const [followed, setFollowed] = useState<boolean>(false);
   const { setUser } = UseUser();
   useEffect(() => {
@@ -98,11 +99,12 @@ export default function Post({
         ))}
       </div>
       <div className="flex items-center justify-center gap-[1rem]">
-        <h1 className="text-[1.2rem] font-bold">{String(post.likes)}</h1>
+        <h1 className="text-[1.2rem] font-bold">{String(likes)}</h1>
         {liked ? (
           <button
             onClick={() => {
               setLiked(false);
+              setLikes((prev) => prev - 1);
               axios.post(
                 `/api/posts/dislike/${post.id}`,
                 {},
@@ -130,6 +132,7 @@ export default function Post({
                 }
               );
               setLiked(true);
+              setLikes((prev) => prev + 1);
             }}
             className="bg-[#1C6CA0] text-white font-bold px-4 py-2 rounded-xl hover:bg-transparent border-[#1C6CA0] active:bg-transparent border transition-all duration-150"
           >

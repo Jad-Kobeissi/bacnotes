@@ -39,6 +39,9 @@ export async function POST(
             id: decoded.id,
           },
         },
+        likes: {
+          increment: 1
+        }
       },
     });
     await prisma.user.update({
