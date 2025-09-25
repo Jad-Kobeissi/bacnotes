@@ -73,22 +73,27 @@ export default function Profile() {
               >
                 Delete
               </button>
-              <button className="bg-[#121212] text-[1.2rem] font-bold rounded px-3 py-1 text-[#d9d9d9] hover:bg-transparent border border-[#141414] transition-all duration-200" onClick={() => setDeleteModal(false)}>
+              <button
+                className="bg-[#121212] text-[1.2rem] font-bold rounded px-3 py-1 text-[#d9d9d9] hover:bg-transparent border border-[#141414] transition-all duration-200"
+                onClick={() => setDeleteModal(false)}
+              >
                 Close
               </button>
             </div>
           </div>
         </div>
       </Dialog>
-      <button
-        onClick={() => setDeleteModal(true)}
-        className="mt-[40vh] bg-[#141414]"
-      >
-        open
-      </button>
       <div className="my-[10vh] flex items-center justify-center flex-col">
         <div className="flex items-center gap-[2rem]">
           <h1 className="text-[2rem] font-bold capitalize">{user?.username}</h1>
+          <button
+            onClick={() => {
+              setDeleteModal(true);
+            }}
+            className="bg-[#ce1a35] text-[1.2rem] font-bold rounded px-3 py-1 text-[#d9d9d9] hover:bg-transparent border border-[#ce1a35] transition-all duration-200"
+          >
+            Delete
+          </button>
         </div>
         <div className="text-[#6d6d6d] font-bold flex gap-[1rem]">
           <h1>Rating: {String(user?.rating)}</h1>
