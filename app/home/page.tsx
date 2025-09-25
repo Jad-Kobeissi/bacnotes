@@ -1,6 +1,6 @@
 "use client";
-import { use, useEffect, useState } from "react";
-import { UseUser } from "../contexts/UserContext";
+import { use, useContext, useEffect, useState } from "react";
+import { UserContext, UserContextType, UseUser } from "../contexts/UserContext";
 import { TPost, TUser } from "../types";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Loading from "../Loading";
@@ -11,8 +11,7 @@ import { Nav } from "../Nav";
 import Post from "../Post";
 
 export default function Home() {
-  const { user } = UseUser();
-  const [mainUser, setMainUser] = useState<TUser | null>(null);
+  const { user } = useContext(UserContext) as UserContextType;
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [hasMore, setHasMore] = useState(true);
@@ -39,15 +38,10 @@ export default function Home() {
   useEffect(() => {
     fetchPosts();
   }, []);
-  useEffect(() => {
-    if (user) {
-      setMainUser(user);
-    }
-  }, [user]);
   return (
     <>
       <Nav />
-      {mainUser == null ? (
+      {user == null ? (
         <Loading className="w-screen h-screen flex items-center justify-center" />
       ) : (
         <InfiniteScroll
@@ -62,7 +56,7 @@ export default function Home() {
           {posts.map((post) => (
             <Post
               post={post}
-              User={mainUser}
+              User={user}
               key={post.id as string}
               profilePage={false}
             />

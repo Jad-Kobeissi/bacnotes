@@ -1,6 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
-import { UseUser } from "../contexts/UserContext";
+import { useContext, useEffect, useState } from "react";
+import { UserContext, UserContextType, UseUser } from "../contexts/UserContext";
 import { TPost, TUser } from "../types";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Loading from "../Loading";
@@ -13,16 +13,15 @@ import { useRouter } from "next/navigation";
 import { Dialog } from "@headlessui/react";
 
 export default function Profile() {
-  const { user } = UseUser();
-  const [mainUser, setMainUser] = useState<TUser | null>(null);
+  const { user } = useContext(UserContext) as UserContextType;
   const [error, setError] = useState("");
   const [hasMore, setHasMore] = useState(true);
   const [posts, setPosts] = useState<TPost[]>([]);
   const [page, setPage] = useState(1);
-  const [deleteModal, setDeleteModal] = useState(false);
+  let [deleteModal, setDeleteModal] = useState(false);
   const fetchPosts = async () => {
     await axios
-      .get(`/api/posts/user/${mainUser?.id}?page=${page}`, {
+      .get(`/api/posts/user/${user?.id}?page=${page}`, {
         headers: {
           Authorization: `Bearer ${getCookie("token")}`,
         },
@@ -40,54 +39,64 @@ export default function Profile() {
       });
   };
   useEffect(() => {
-    if (user) {
-      setMainUser(() => {
-        return user;
-      });
-    }
-    console.log(user?.followers);
-  }, [user]);
-  useEffect(() => {
-    if (mainUser) {
-      fetchPosts();
-    }
-  }, [mainUser]);
+    fetchPosts();
+  }, []);
   const router = useRouter();
-  return mainUser ? (
+  return user ? (
     <>
       <Nav />
-      <Dialog open={deleteModal} onClose={() => setDeleteModal(false)}>
-        <h1>hi</h1>
+      <Dialog
+        open={deleteModal}
+        onClose={() => setDeleteModal(false)}
+        className=" bg-transparent backdrop-blur-2xl text-white w-screen h-screen absolute top-0 left-0"
+      >
+        <div className="flex flex-col items-center justify-center h-screen gap-[2rem]">
+          <div className="bg-[#141414] p-[2rem] rounded flex flex-col gap-[2rem] items-center">
+            <h1 className="text-[2rem]">
+              Are you sure you want to delete your account?
+            </h1>
+            <div className="flex items-center gap-[2rem]">
+              <button
+                onClick={() => {
+                  axios
+                    .delete(`/api/user/${user.id}`, {
+                      headers: {
+                        Authorization: `Bearer ${getCookie("token")}`,
+                      },
+                    })
+                    .then((res) => {
+                      router.push("/");
+                      localStorage.clear();
+                    });
+                }}
+                className="bg-[#ce1a35] text-[1.2rem] font-bold rounded px-3 py-1 text-[#d9d9d9] hover:bg-transparent border border-[#ce1a35] transition-all duration-200"
+              >
+                Delete
+              </button>
+              <button className="bg-[#121212] text-[1.2rem] font-bold rounded px-3 py-1 text-[#d9d9d9] hover:bg-transparent border border-[#141414] transition-all duration-200" onClick={() => setDeleteModal(false)}>
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
       </Dialog>
+      <button
+        onClick={() => setDeleteModal(true)}
+        className="mt-[40vh] bg-[#141414]"
+      >
+        open
+      </button>
       <div className="my-[10vh] flex items-center justify-center flex-col">
         <div className="flex items-center gap-[2rem]">
-          <h1 className="text-[2rem] font-bold capitalize">
-            {mainUser.username}
-          </h1>
-          <button
-            onClick={() => {
-              axios
-                .delete(`/api/user/${mainUser.id}`, {
-                  headers: {
-                    Authorization: `Bearer ${getCookie("token")}`,
-                  },
-                })
-                .then((res) => {
-                  router.push("/");
-                });
-            }}
-            className="bg-[#ce1a35] text-[1.2rem] font-bold rounded px-3 py-1 text-[#d9d9d9] hover:bg-transparent border border-[#ce1a35] transition-all duration-200"
-          >
-            Delete
-          </button>
+          <h1 className="text-[2rem] font-bold capitalize">{user?.username}</h1>
         </div>
         <div className="text-[#6d6d6d] font-bold flex gap-[1rem]">
-          <h1>Rating: {String(mainUser?.rating)}</h1>
-          <h1>User Points: {String(mainUser?.points)}</h1>
+          <h1>Rating: {String(user?.rating)}</h1>
+          <h1>User Points: {String(user?.points)}</h1>
         </div>
         <div className="flex gap-[1rem] text-[#6d6d6dcc]">
-          <h1>Followers: {mainUser?.followers.length || 0}</h1>
-          <h1>Following: {mainUser?.following.length || 0}</h1>
+          <h1>Followers: {user.followers ? user.followers.length : 0}</h1>
+          <h1>Following: {user.following ? user.following.length : 0}</h1>
         </div>
       </div>
       <InfiniteScroll
@@ -103,7 +112,7 @@ export default function Profile() {
           <Post
             key={post.id as string}
             post={post}
-            User={mainUser as TUser}
+            User={user as TUser}
             profilePage={true}
           />
         ))}

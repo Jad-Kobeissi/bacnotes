@@ -42,7 +42,7 @@ export async function POST(
 
     if (!follower) return new Response("Please LogIn Again", { status: 404 });
 
-    if (follower.following.some((u) => u.id == id)) {
+    if (!follower.following.some((u) => u.id == id)) {
       return new Response("You are not following this user", {
         status: 400,
       });
@@ -53,7 +53,7 @@ export async function POST(
       },
       data: {
         following: {
-          connect: {
+          disconnect: {
             id,
           },
         },
@@ -65,7 +65,7 @@ export async function POST(
       },
       data: {
         followers: {
-          connect: {
+          disconnect: {
             id: decoded.id,
           },
         },

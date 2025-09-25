@@ -8,7 +8,7 @@ import {
 } from "react";
 import { TUser } from "../types";
 
-type UserContextType = {
+export type UserContextType = {
   user: TUser | null;
   setUser: (user: TUser | null) => void;
 };

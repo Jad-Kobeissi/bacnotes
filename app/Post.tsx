@@ -49,15 +49,19 @@ export default function Post({
             <button
               onClick={() => {
                 setFollowed(false);
-                axios.post(
-                  `/api/user/unfollow/${post.authorId}`,
-                  {},
-                  {
-                    headers: {
-                      Authorization: `Bearer ${getCookie("token")}`,
-                    },
-                  }
-                );
+                axios
+                  .post(
+                    `/api/user/unfollow/${post.authorId}`,
+                    {},
+                    {
+                      headers: {
+                        Authorization: `Bearer ${getCookie("token")}`,
+                      },
+                    }
+                  )
+                  .then((res) => {
+                    setUser(res.data);
+                  });
               }}
               className="bg-[#1C6CA0] text-white font-bold px-4 py-2 rounded-xl hover:bg-transparent border-[#1C6CA0] active:bg-transparent border transition-all duration-150"
             >
@@ -76,6 +80,9 @@ export default function Post({
                       },
                     }
                   )
+                  .then((res) => {
+                    setUser(res.data);
+                  })
                   .catch((err) => console.log(err));
                 setFollowed(true);
               }}

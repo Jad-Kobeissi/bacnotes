@@ -19,6 +19,11 @@ export async function DELETE(
       return new Response("Forbidden", { status: 403 });
     }
 
+    const post = await prisma.user.findUnique({ where: { id } });
+
+    if (!post) {
+      return new Response("User not found", { status: 404 });
+    }
     await prisma.user.delete({
       where: {
         id: id,
