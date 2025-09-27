@@ -1,4 +1,4 @@
-import { PrismaClient } from "@/app/generated/prisma/client";
+import { PrismaClient } from "@/app/generated/prisma";
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 export const prisma = new PrismaClient();
