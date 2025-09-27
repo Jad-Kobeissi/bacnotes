@@ -1,28 +1,30 @@
 "use client";
+import { motion } from "motion/react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useInView } from "react-intersection-observer";
-import Heart from "./heart-solid-full";
 import Lock from "./lock-solid-full";
+import Heart from "./heart-solid-full";
 import Plus from "./plus-solid-full";
 import User from "./user-solid-full";
-import { motion } from "motion/react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
 function Nav() {
   return (
-    <nav className="fixed w-screen flex items-center justify-between px-[2vw] bg-[#121212]">
-      <button className="text-[1.5rem] font-bold">Bacgram</button>
-      <div className="flex items-center justify-center gap-[2vw] text-[1.2rem]">
-        <div className="relative group">
+    <nav className="fixed w-screen flex items-cemter justify-between p-4 bg-transparent">
+      <Link href={"#home"} className="text-[1.5rem] font-bold">
+        Bacgram
+      </Link>
+      <div className="flex items-center justify-center gap-4">
+        <div className="group relative">
           <Link href={"#home"}>Home</Link>
-          <span className="bg-[#d9d9d9] w-0 h-0.5 bottom-0 left-0 absolute group-hover:w-full group-focus:w-full group-active:w-full transition-all duration-200"></span>
+          <span className="absolute w-0 h-0.5 left-0 bottom-0 group-hover:w-full group-active:w-full bg-[#d9d9d9] transition-all duration-200"></span>
         </div>
         <div className="group relative">
           <Link href={"#about"}>About</Link>
-          <span className="bg-[#d9d9d9] w-0 h-0.5 bottom-0 left-0 absolute group-hover:w-full group-focus:w-full group-active:w-full transition-all duration-200"></span>
+          <span className="absolute w-0 h-0.5 left-0 bottom-0 group-hover:w-full group-active:w-full bg-[#d9d9d9] transition-all duration-200"></span>
         </div>
         <div className="group relative">
           <Link href={"#features"}>Features</Link>
-          <span className="bg-[#d9d9d9] w-0 h-0.5 bottom-0 left-0 absolute group-hover:w-full group-focus:w-full group-active:w-full transition-all duration-200"></span>
+          <span className="absolute w-0 h-0.5 left-0 bottom-0 group-hover:w-full group-active:w-full bg-[#d9d9d9] transition-all duration-200"></span>
         </div>
       </div>
     </nav>
@@ -36,73 +38,87 @@ function Home() {
   const router = useRouter();
   return (
     <motion.div
-      className="flex landing-md:flex-row flex-col-reverse items-center justify-between landing-md:px-[2rem] w-screen landing-md:mt-0 mt-[15vh] mb-[15vh]"
-      id="home"
-      initial={{ opacity: 0, y: 20 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.3 }}
       ref={ref}
+      initial={{ opacity: 0, y: 100 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      exit={inView ? { opacity: 0, y: -100 } : {}}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="flex landing-md:flex-row flex-col-reverse landing-md:gap-0 gap-[2vh] items-center landing-md:justify-between justify-center h-screen p-4"
     >
-      <div className="flex flex-col landing-md:items-start items-center justify-center landing-md:min-h-screen py-4 landing-md:w-1/2 w-screen">
-        <h1 className="text-[3rem] font-bold text-center landing-md:text-left">
+      <div
+        className="landing-md:w-1/2 w-screen flex flex-col gap-[1em]"
+        id="home"
+      >
+        <h1 className="fluid-4xl font-bold landing-md:text-left text-center w-full">
           Welcome To Bacnotes
         </h1>
-        <p className="text-[#6d6d66d] text-center landing-md:text-left">
+        <p className="text-[var(--secondary-text)] fluid-sm landing-md:text-left text-center">
           Share, discover, and collaborate on notes with your classmates. This
           app is BAC students’ private space to upload notes, access helpful
           resources, and support each other throughout the school year.
         </p>
-        <div className="flex gap-4 items-center justify-center mt-4 landing-md:w-fit w-screen">
+        <div className="flex gap-4 items-center landing-md:justify-start justify-center">
           <button
-            className="text-[1.5rem] rounded-xl bg-[#1C6CA0] font-bold px-4 py-2 hover:bg-[#145a86] whitespace-nowrap"
+            className="fluid-lg font-bold bg-[var(--brand)] px-4 py-1 rounded-md border-[var(--brand)] border hover:bg-transparent active:bg-transparent transition-all duration-200"
             onClick={() => router.push("/signup")}
           >
             Get Started Now
           </button>
-          <h1 className="text-[1.5rem] font-bold">OR</h1>
-          <button
-            className="text-[1.5rem] rounded-xl bg-[#141414] font-bold px-4 py-2  whitespace-nowrap"
-            onClick={() => router.push("/login")}
-          >
-            LogIn
-          </button>
+          <div className="landing-md:flex hidden gap-4">
+            <h1 className="text-[1.5rem] font-bold">OR</h1>
+            <button
+              className="fluid-lg font-bold bg-[#121212] border-[#121212] border hover:bg-transparent active:bg-transparent transition-all duration-200 px-4 py-1 rounded-md"
+              onClick={() => router.push("/login")}
+            >
+              LogIn
+            </button>
+          </div>
         </div>
       </div>
       <div className="landing-md:w-1/2 flex justify-end">
-        <img src="/bac.png" className="w-[30rem] rounded-xl" />
+        <img
+          src="/bac.png"
+          alt="Picture of bac"
+          className="w-[30rem] rounded-md"
+        />
       </div>
     </motion.div>
   );
 }
 function About() {
   const [ref, inView] = useInView({
-    triggerOnce: false,
     threshold: 0.8,
+    triggerOnce: false,
   });
   return (
     <motion.div
       id="about"
-      className="flex flex-col items-center justify-center landing-md:px-[2rem] w-screen mt-[20vh] gap-4"
-      initial={{ opacity: 0, y: 20 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.3 }}
-      exit={{ opacity: 0, y: -20 }}
       ref={ref}
+      initial={{ opacity: 0, y: 100 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      exit={inView ? { opacity: 0, y: -100 } : {}}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="mb-[20vh]"
     >
-      <h1 className="md:text-[3rem] text-[2.5rem] font-bold text-center">
-        What Is Bacnotes?
-      </h1>
-      <p className="text-[#d9d9d9] text-center">
-        <span className="text-[#1C6CA0] font-bold">Bacnotes</span> is a platform
-        designed exclusively for BAC students, allowing you to{" "}
-        <span className="text-[#1C6CA0] font-bold">share</span> notes and{" "}
-        <span className="text-[#1C6CA0] font-bold">stay connected</span> through
-        a familiar, secure space. Whether you’re contributing your own notes or
-        finding notes from classmates,{" "}
-        <span className="text-[#1C6CA0] font-bold">Bacnotes</span> helps bring
-        the student community closer together throughout the school year.
-      </p>
+      <h1 className="text-[3rem] font-bold text-center">What Is Bacnotes?</h1>
+      <div className="flex justify-center">
+        <p className="text-[var(--secondary-text)] text-center landing-md:w-3/4 w-screen">
+          <span className="font-bold text-[var(--brand)]">Bacnotes</span> is a
+          platform designed exclusively for BAC students, allowing you to 
+          <span className="font-bold text-[var(--brand)]">
+            share notes
+          </span>{" "}
+          and 
+          <span className="font-bold text-[var(--brand)]">
+            stay connected
+          </span>{" "}
+          through a familiar, secure space. Whether you’re contributing your own
+          notes or finding notes from classmates,{" "}
+          <span className="font-bold text-[var(--brand)]">Bacnotes</span> helps
+          bring the student community closer together throughout the school
+          year.
+        </p>
+      </div>
     </motion.div>
   );
 }
@@ -117,30 +133,31 @@ function Card({
 }) {
   const [ref, inView] = useInView({
     triggerOnce: false,
-    threshold: 0.8,
+    threshold: 0.5,
   });
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.3 }}
       ref={ref}
-      className="bg-[#141414] w-[250px] h-fit rounded-md flex flex-col items-center justify-center"
+      initial={{ opacity: 0, y: 100 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      exit={inView ? { opacity: 0, y: -100 } : {}}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="bg-[#121212] border border-[#141414] landing-md:max-w-1/2 w-screen h-fit p-[2rem] flex flex-col items-center justify-center rounded-md"
     >
       <Svg />
-      <div className="ml-[1vw]">
-        <h1 className="capitalize text-[1.3rem] font-bold">{title}</h1>
-        <p className="text-[#6d6d66d]">{description}</p>
+      <div>
+        <h1 className="text-[2.3rem] font-bold">{title}</h1>
+        <p className="text-[var(--secondary-text)]">{description}</p>
       </div>
     </motion.div>
   );
 }
+
 function Features() {
   return (
-    <div className="my-[15vh]" id="features">
-      <h1 className="text-[3rem] text-center font-bold">Features</h1>
-      <div className="grid grid-cols-1 landing-md:grid-cols-2 place-items-center gap-[5vh]">
+    <div className="mb-[20vh]" id="features">
+      <h1 className="text-[3rem] font-bold text-center">Features</h1>
+      <div className="grid landing-md:grid-cols-2 grid-cols-1 place-items-center gap-[2rem]">
         <Card
           title="Security"
           description="Highest security to ensure that your web experience remains secure at all times"
@@ -167,11 +184,11 @@ function Features() {
 }
 export default function Page() {
   return (
-    <div className="overflow-x-hidden">
+    <>
       <Nav />
       <Home />
       <About />
       <Features />
-    </div>
+    </>
   );
 }

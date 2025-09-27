@@ -1,16 +1,22 @@
 @import "tailwindcss";
+@plugin "tailwind-fluid-typography";
 
 :root {
-  --background: #121212;
-  --foreground: #d9d9d9;
+  --background: rgba(7, 7, 5, 0.9);
+  --foreground: #fff2eb;
+  --secondary-text: #a3a3a3;
+  --divider: #dce3e9;
+  --accent: #ffb400;
+  --button-text: #d9d9d9;
+  --brand: #1c6ca0;
 }
 body {
-  background: var(--background);
+  background: rgba(7, 7, 5, 0.979);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
 @theme {
-  --breakpoint-landing-md: 830px;
+  --breakpoint-landing-md: 750px;
 }
 html {
   scroll-behavior: smooth;
