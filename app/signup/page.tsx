@@ -24,7 +24,7 @@ export default function Signup() {
         <h1>Get Started Now</h1>
       </div>
       <form
-        className="landing-md:bg-[#131313] flex flex-col items-center justify-center max-w-1/2 min-w-fit py-[7rem] px-[4rem] rounded"
+        className="flex flex-col items-center justify-center max-w-1/2 min-w-fit py-[7rem] px-[4rem] rounded"
         onSubmit={(e) => {
           e.preventDefault();
           setLoading(true);
@@ -51,7 +51,7 @@ export default function Signup() {
         <h1 className="text-[2.5rem] font-bold">SignUp</h1>
         {error && <Error error={error} />}
         <div className="flex flex-col">
-          <label htmlFor="username" className="text-[#6d6d66d]">
+          <label htmlFor="username" className="text-[#6d6d6d]">
             Username
           </label>
           <input
@@ -59,11 +59,11 @@ export default function Signup() {
             placeholder="John Doe"
             ref={username}
             id="username"
-            className="px-4 py-2 rounded text-[1.3rem] bg-[#121212]"
+            className="px-4 py-2 rounded text-[1.3rem] bg-[#11111178]"
           />
         </div>
         <div className="flex flex-col">
-          <label htmlFor="password" className="text-[#6d6d66d]">
+          <label htmlFor="password" className="text-[#6d6d6d]">
             Password
           </label>
           <input
@@ -71,23 +71,23 @@ export default function Signup() {
             placeholder="Password"
             ref={password}
             id="password"
-            className="px-4 py-2 rounded text-[1.3rem] bg-[#121212]"
+            className="px-4 py-2 rounded text-[1.3rem] bg-[#11111178]"
           />
         </div>
         <div className="flex flex-col">
-          <label htmlFor="grade" className="text-[#6d6d66d]">
+          <label htmlFor="grade" className="text-[#6d6d6d]">
             Grade
           </label>
           <input
             type="number"
             placeholder="Grade"
             ref={grade}
-            className="bg-[#121212] py-2 px-4 text-[1.3rem] rounded"
+            className="bg-[#11111178] py-2 px-4 text-[1.3rem] rounded"
           />
         </div>
-        <div className="relative group">
+        <div className="relative group text-[#6d6d6d]">
           <Link href={"/login"}>Already Have An Account? LogIn Here</Link>
-          <div className="h-0.5 w-0 bg-[#d9d9d9] absolute bottom-0 left-0 group-hover:w-full transition-all duration-150"></div>
+          <div className="h-0.5 w-0 bg-[#6d6d6d] absolute bottom-0 left-0 group-hover:w-full group-active:w-full transition-all duration-150"></div>
         </div>
         <button className="bg-[#1C6CA0] text-[#d9d9d9] px-5 py-1 rounded mt-4 text-[1.3rem] font-bold">
           SignUp

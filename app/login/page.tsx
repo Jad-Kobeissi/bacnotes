@@ -74,9 +74,9 @@ export default function LogIn() {
             className="px-4 py-2 rounded text-[1.3rem] bg-[#11111178]"
           />
         </div>
-        <div className="relative group">
+        <div className="relative group text-[#6d6d6d]">
           <Link href={"/signup"}>Don't Have An Account? SignUp Here</Link>
-          <div className="h-0.5 w-0 bg-[#d9d9d9] absolute bottom-0 left-0 group-hover:w-full transition-all duration-150"></div>
+          <div className="h-0.5 w-0 bg-[#6d6d6d] absolute bottom-0 left-0 group-hover:w-full group-active:w-full transition-all duration-150"></div>
         </div>
         <button className="bg-[#1C6CA0] text-[#d9d9d9] px-5 py-1 rounded mt-4 text-[1.3rem] font-bold">
           LogIn
