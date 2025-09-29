@@ -9,7 +9,7 @@ import Plus from "./plus-solid-full";
 import User from "./user-solid-full";
 function Nav() {
   return (
-    <nav className="fixed w-screen flex items-cemter justify-between p-4 bg-transparent">
+    <nav className="fixed w-screen flex items-cemter justify-between p-4 z-50">
       <Link href={"#home"} className="text-[1.5rem] font-bold">
         Bacgram
       </Link>
@@ -43,6 +43,7 @@ function Home() {
       animate={inView ? { opacity: 1, y: 0 } : {}}
       exit={inView ? { opacity: 0, y: -100 } : {}}
       transition={{ duration: 0.5, ease: "easeOut" }}
+      id="home"
       className="flex landing-md:flex-row flex-col-reverse landing-md:gap-0 gap-[2vh] items-center landing-md:justify-between justify-center h-screen p-4"
     >
       <div

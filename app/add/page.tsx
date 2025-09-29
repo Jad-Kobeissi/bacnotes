@@ -94,6 +94,12 @@ export default function Add() {
               <option value="arabic">Arabic</option>
               <option value="french">French</option>
               <option value="physics">Physics</option>
+              <option value="chemistry">Chemistry</option>
+              <option value="biology">Biology</option>
+              <option value="Math">Math</option>
+              <option value="geography">Geography</option>
+              <option value="civics">Civics</option>
+              <option value="history">History</option>
             </select>
           </div>
           <div className="flex flex-col">
