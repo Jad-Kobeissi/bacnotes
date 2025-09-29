@@ -25,7 +25,7 @@ export default function LogIn() {
         <h1>Welcome Back!</h1>
       </div>
       <form
-        className="landing-md:bg-[#131313] flex flex-col items-center justify-center max-w-1/2 min-w-fit py-[7rem] px-[4rem] rounded"
+        className="flex flex-col items-center justify-center max-w-1/2 min-w-fit py-[7rem] px-[4rem] rounded"
         onSubmit={(e) => {
           e.preventDefault();
           setLoading(true);
@@ -51,7 +51,7 @@ export default function LogIn() {
         <h1 className="text-[2.5rem] font-bold">LogIn</h1>
         {error && <Error error={error} />}
         <div className="flex flex-col">
-          <label htmlFor="username" className="text-[#6d6d66d]">
+          <label htmlFor="username" className="text-[#6d6d6d]">
             Username
           </label>
           <input
@@ -59,11 +59,11 @@ export default function LogIn() {
             placeholder="John Doe"
             ref={username}
             id="username"
-            className="px-4 py-2 rounded text-[1.3rem] bg-[#121212]"
+            className="px-4 py-2 rounded text-[1.3rem] bg-[#11111178]"
           />
         </div>
         <div className="flex flex-col">
-          <label htmlFor="password" className="text-[#6d6d66d]">
+          <label htmlFor="password" className="text-[#6d6d6d]">
             Password
           </label>
           <input
@@ -71,7 +71,7 @@ export default function LogIn() {
             placeholder="Password"
             ref={password}
             id="password"
-            className="px-4 py-2 rounded text-[1.3rem] bg-[#121212]"
+            className="px-4 py-2 rounded text-[1.3rem] bg-[#11111178]"
           />
         </div>
         <div className="relative group">

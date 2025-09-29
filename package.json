@@ -7,7 +7,8 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "biome check",
-    "format": "biome format --write"
+    "format": "biome format --write",
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.8",
@@ -19,6 +20,7 @@
     "jsonwebtoken": "^9.0.2",
     "motion": "^12.23.13",
     "next": "15.5.3",
+    "next-sitemap": "^4.2.3",
     "prisma": "^6.16.1",
     "react": "19.1.0",
     "react-dom": "19.1.0",
