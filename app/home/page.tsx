@@ -39,10 +39,10 @@ export default function Home() {
     fetchPosts();
   }, []);
   return (
-    <>
+    <div className="bg-[var(--background)] min-h-screen text-[var(--text-primary)]">
       <Nav />
       {user == null ? (
-        <Loading className="w-screen h-screen flex items-center justify-center" />
+        <Loading className="w-screen h-screen flex items-center justify-center bg-[var(--background)]" />
       ) : (
         <InfiniteScroll
           dataLength={posts.length}
@@ -64,6 +64,6 @@ export default function Home() {
         </InfiniteScroll>
       )}
       {error && <Error error={error} className="text-[2rem] text-center" />}
-    </>
+    </div>
   );
 }
