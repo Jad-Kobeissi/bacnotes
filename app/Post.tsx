@@ -81,7 +81,8 @@ export default function Post({
                     }
                   )
                   .then((res) => {
-                    setUser(res.data);
+                    console.log(res.data);
+                    setUser(res.data as TUser);
                   })
                   .catch((err) => console.log(err));
                 setFollowed(true);

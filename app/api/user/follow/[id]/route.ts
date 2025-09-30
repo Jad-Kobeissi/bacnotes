@@ -58,6 +58,12 @@ export async function POST(
           },
         },
       },
+      include: {
+        followers: true,
+        following: true,
+        likedPosts: true,
+        posts: true,
+      },
     });
     await prisma.user.update({
       where: {
