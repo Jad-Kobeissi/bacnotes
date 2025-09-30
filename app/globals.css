@@ -21,3 +21,7 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+.button {
+  @apply bg-[var(--brand)] hover:bg-transparent active:bg-transparent border border-[var(--brand)] text-[var(--foreground)] px-4 py-2 rounded-lg mt-2 transition-all duration-200 font-bold;
+}

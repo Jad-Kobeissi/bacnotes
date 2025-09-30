@@ -69,6 +69,20 @@ export async function POST(req: Request) {
     )
       return new Response("Missing required fields", { status: 400 });
 
+    if (
+      ![
+        "math",
+        "physics",
+        "chemistry",
+        "biology",
+        "economics",
+        "history",
+        "geography",
+        "english",
+      ].includes(subject)
+    ) {
+      return new Response("Invalid subject", { status: 400 });
+    }
     const post = await prisma.post.create({
       data: {
         title,
