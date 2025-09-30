@@ -43,11 +43,11 @@ export async function POST(
     if (!follower) return new Response("Please LogIn Again", { status: 404 });
 
     if (follower.following.some((u) => u.id == id)) {
-      return new Response("You are not following this user", {
+      return new Response("You are already following this user", {
         status: 400,
       });
     }
-    await prisma.user.update({
+    const newFollower = await prisma.user.update({
       where: {
         id: decoded.id,
       },
@@ -72,7 +72,7 @@ export async function POST(
       },
     });
 
-    return Response.json(follower);
+    return Response.json(newFollower);
   } catch (error: any) {
     return new Response(error, { status: 500 });
   }

@@ -47,7 +47,7 @@ export async function POST(
         status: 400,
       });
     }
-    await prisma.user.update({
+    const newFollower = await prisma.user.update({
       where: {
         id: decoded.id,
       },
@@ -72,7 +72,7 @@ export async function POST(
       },
     });
 
-    return Response.json(follower);
+    return Response.json(newFollower);
   } catch (error: any) {
     return new Response(error, { status: 500 });
   }
