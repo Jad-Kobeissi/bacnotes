@@ -8,10 +8,12 @@ export default function Post({
   post,
   User,
   profilePage,
+  className,
 }: {
   post: TPost;
   User: TUser;
   profilePage: boolean;
+  className?: string;
 }) {
   const [liked, setLiked] = useState<boolean>(false);
   const [likes, setLikes] = useState<number>(post.likes as number);
@@ -39,7 +41,7 @@ export default function Post({
   };
   return (
     <div
-      className="bg-[#141414] w-fit h-fit rounded-xl p-[2rem] flex flex-col items-center"
+      className={`bg-[#141414] w-fit h-fit rounded-xl p-[2rem] flex flex-col items-center ${className}`}
       key={post.id as string}
     >
       <div className="flex gap-[1rem]">
