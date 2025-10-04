@@ -108,7 +108,7 @@ export default function Profile() {
         dataLength={posts.length}
         hasMore={hasMore}
         loader={
-          <Loading className="flex items-center justify-center mt-[30vh]" />
+          <Loading className="flex items-center justify-center mt-[30vh] h-screen" />
         }
         next={fetchPosts}
         className="flex items-center flex-col gap-[5vh] mt-[10vh]"

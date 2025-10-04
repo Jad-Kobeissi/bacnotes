@@ -20,12 +20,15 @@ export default function Post({
   const [followed, setFollowed] = useState<boolean>(false);
   const { setUser } = UseUser();
   useEffect(() => {
+    if (!User || !post?.author?.followers) return;
+
     if (post.likedUsers.some((u) => u.id == User.id)) {
       setLiked(true);
     }
     if (post.author.followers.some((u) => u.id == User.id)) {
       setFollowed(true);
     }
+    console.log(User);
   }, [User]);
   const deletePost = async (id: string) => {
     axios
@@ -150,7 +153,7 @@ export default function Post({
           </button>
         )}
       </div>
-      {User.id == post.authorId && (
+      {profilePage && (
         <div className="flex items-center justify-center mt-[3vh]">
           <button
             className="bg-[#ce1a35] text-[1.3rem] font-bold px-4 py-1 rounded-lg"
