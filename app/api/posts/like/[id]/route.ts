@@ -40,18 +40,11 @@ export async function POST(
           },
         },
         likes: {
-          increment: 1
-        }
+          increment: 1,
+        },
       },
     });
-    await prisma.user.update({
-      where: {
-        id: post.authorId,
-      },
-      data: {
-        rating: 5,
-      },
-    });
+
     return Response.json(post);
   } catch (error: any) {
     console.log(error);

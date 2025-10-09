@@ -60,6 +60,8 @@ export default function Signup() {
             ref={username}
             id="username"
             className="px-4 py-2 rounded text-[1.3rem] bg-[#11111178]"
+            min={3}
+            max={20}
           />
         </div>
         <div className="flex flex-col">
@@ -72,6 +74,7 @@ export default function Signup() {
             ref={password}
             id="password"
             className="px-4 py-2 rounded text-[1.3rem] bg-[#11111178]"
+            minLength={6}
           />
         </div>
         <div className="flex flex-col">
@@ -83,6 +86,9 @@ export default function Signup() {
             placeholder="Grade"
             ref={grade}
             className="bg-[#11111178] py-2 px-4 text-[1.3rem] rounded"
+            min={1}
+            max={12}
+            id="grade"
           />
         </div>
         <div className="relative group text-[#6d6d6d]">

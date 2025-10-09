@@ -125,6 +125,6 @@ export default function Profile() {
       {error && <Error error={error} className="text-[2rem] text-center" />}
     </>
   ) : (
-    <Loading />
+    <Loading className="flex items-center justify-center h-screen" />
   );
 }
