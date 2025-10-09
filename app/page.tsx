@@ -166,7 +166,7 @@ function Features() {
         />
         <Card
           title="Likes"
-          description="Users can like posts to engage wuth the creator"
+          description="Users can like posts to engage with the creator"
           Svg={Heart}
         />
         <Card
