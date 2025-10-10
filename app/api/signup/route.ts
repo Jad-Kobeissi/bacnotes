@@ -7,7 +7,7 @@ export async function POST(req: Request) {
   try {
     const { username, password, grade } = await req.json();
 
-    if (!username || !password || !grade || isEmpty([username, grade])) {
+    if (!username || !password || !grade || isEmpty([username, password])) {
       return new Response("Username, Password, or grade is missing", {
         status: 400,
       });
