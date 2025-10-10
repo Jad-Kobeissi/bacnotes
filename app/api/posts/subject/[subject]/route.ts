@@ -37,12 +37,18 @@ export async function GET(
     ) {
       return new Response("Invalid subject", { status: 400 });
     }
-
+    const user = await prisma.user.findUnique({
+      where: { id: decoded.id },
+      select: { grade: true },
+    });
     const posts = await prisma.post.findMany({
       where: {
         subject: subject,
         NOT: {
           authorId: decoded.id,
+        },
+        author: {
+          grade: user?.grade,
         },
       },
       include: {

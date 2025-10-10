@@ -15,10 +15,17 @@ export async function GET(req: Request) {
     }
 
     const decoded: any = await decode(authHeader);
+    const user = await prisma.user.findUnique({
+      where: { id: decoded.id },
+      select: { grade: true },
+    });
     const posts = await prisma.post.findMany({
       where: {
         authorId: {
           not: decoded.id,
+        },
+        author: {
+          grade: user?.grade,
         },
       },
       include: {

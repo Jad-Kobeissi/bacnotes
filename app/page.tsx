@@ -78,7 +78,7 @@ function Home() {
       </div>
       <div className="landing-md:w-1/2 flex justify-end">
         <img
-          src="/bac.png"
+          src="/notes.png"
           alt="Picture of bac"
           className="w-[30rem] rounded-md"
         />
