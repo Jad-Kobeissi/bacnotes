@@ -3,6 +3,7 @@ import { TPost, TUser } from "./types";
 import { UseUser } from "./contexts/UserContext";
 import axios from "axios";
 import { getCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
 
 export default function Post({
   post,
@@ -19,6 +20,7 @@ export default function Post({
   const [likes, setLikes] = useState<number>(post.likes as number);
   const [followed, setFollowed] = useState<boolean>(false);
   const { setUser } = UseUser();
+  const router = useRouter();
   useEffect(() => {
     if (!User || !post?.author?.followers) return;
 
@@ -46,6 +48,7 @@ export default function Post({
     <div
       className={`bg-[#141414] w-fit h-fit rounded-xl p-[2rem] flex flex-col items-center ${className}`}
       key={post.id as string}
+      onClick={() => router.push(`/post/${post.id}`)}
     >
       <div className="flex gap-[1rem]">
         <h1 className="text-[1.5rem] font-bold">{post.author.username}</h1>
@@ -107,6 +110,7 @@ export default function Post({
             key={url as string}
             src={url as string}
             alt={post.title as string}
+            onClick={() => window.open(url as string, "_blank")}
             className="snap-center"
           />
         ))}
