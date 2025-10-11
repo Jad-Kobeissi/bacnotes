@@ -75,7 +75,7 @@ export async function DELETE(
           decrement: 1,
         },
         rating: {
-          decrement: 10,
+          decrement: 2,
         },
       },
       include: {

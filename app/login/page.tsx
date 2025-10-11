@@ -42,8 +42,6 @@ export default function LogIn() {
             })
             .catch((err) => {
               setError(err.response.data);
-            })
-            .finally(() => {
               setLoading(false);
             });
         }}

@@ -20,6 +20,8 @@ export default function Profile() {
   const [page, setPage] = useState(1);
   let [deleteModal, setDeleteModal] = useState(false);
   const fetchPosts = async () => {
+    setError("");
+    setHasMore(true);
     await axios
       .get(`/api/posts/user/${user?.id}?page=${page}`, {
         headers: {
@@ -39,8 +41,9 @@ export default function Profile() {
       });
   };
   useEffect(() => {
+    if (!user) return;
     fetchPosts();
-  }, []);
+  }, [user]);
   const router = useRouter();
   return user ? (
     <>

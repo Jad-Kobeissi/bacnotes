@@ -134,7 +134,7 @@ export async function POST(req: Request) {
           increment: 1,
         },
         rating: {
-          increment: 10,
+          increment: 2,
         },
       },
       include: {

@@ -42,8 +42,6 @@ export default function Signup() {
             })
             .catch((err) => {
               setError(err.response.data);
-            })
-            .finally(() => {
               setLoading(false);
             });
         }}
