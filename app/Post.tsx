@@ -110,7 +110,10 @@ export default function Post({
             key={url as string}
             src={url as string}
             alt={post.title as string}
-            onClick={() => window.open(url as string, "_blank")}
+            onClick={(e) => {
+              e.stopPropagation();
+              window.open(url as string, "_blank");
+            }}
             className="snap-center"
           />
         ))}
