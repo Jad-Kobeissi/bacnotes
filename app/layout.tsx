@@ -16,6 +16,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "BacNotes",
   description: "The perfect app for BAC students to share their notes",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
@@ -30,6 +33,7 @@ export default function RootLayout({
           name="google-site-verification"
           content="eDHYXDDzOToCKgEMITwgssNkZTxNr4AG9X40918z9YQ"
         />
+        <title>Bacnotes</title>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
