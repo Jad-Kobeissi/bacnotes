@@ -51,7 +51,12 @@ export default function Post({
       onClick={() => router.push(`/post/${post.id}`)}
     >
       <div className="flex gap-[1rem]">
-        <h1 className="text-[1.5rem] font-bold">{post.author.username}</h1>
+        <h1 className="text-[2rem] font-bold capitalize flex items-center gap-4">
+          {post.author.username}{" "}
+          {post.author.admin ? (
+            <p className="text-[1rem] text-[var(--secondary-text)]">admin</p>
+          ) : null}
+        </h1>
         {!profilePage &&
           (followed ? (
             <button
@@ -160,7 +165,7 @@ export default function Post({
           </button>
         )}
       </div>
-      {profilePage && (
+      {(profilePage || User.admin) && (
         <div className="flex items-center justify-center mt-[3vh]">
           <button
             className="bg-[#ce1a35] text-[1.3rem] font-bold px-4 py-1 rounded-lg"

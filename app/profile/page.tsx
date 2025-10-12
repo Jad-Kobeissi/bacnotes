@@ -88,7 +88,12 @@ export default function Profile() {
       </Dialog>
       <div className="my-[10vh] flex items-center justify-center flex-col">
         <div className="flex items-center gap-[2rem]">
-          <h1 className="text-[2rem] font-bold capitalize">{user?.username}</h1>
+          <h1 className="text-[2rem] font-bold capitalize flex items-center gap-4">
+            {user?.username}{" "}
+            {user.admin ? (
+              <p className="text-[1rem] text-[var(--secondary-text)]">admin</p>
+            ) : null}
+          </h1>
           <button
             onClick={() => {
               setDeleteModal(true);
