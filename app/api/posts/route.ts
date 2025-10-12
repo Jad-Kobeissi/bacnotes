@@ -27,6 +27,9 @@ export async function GET(req: Request) {
         author: {
           grade: user?.grade,
         },
+        approved: {
+          equals: true,
+        },
       },
       include: {
         author: {

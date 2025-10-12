@@ -36,5 +36,6 @@ model Post {
   imageUrls String[]
   likes Int
   likedUsers User[] @relation("likes")
+  approved Boolean @default(false)
   createdAt DateTime @default(now())
 }
