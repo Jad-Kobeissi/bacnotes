@@ -103,7 +103,10 @@ export default function Profile() {
             Delete
           </button>
         </div>
-        <div className="text-[#6d6d6d] font-bold flex gap-[1rem]">
+        <h1 className="text-[#6d6d6d] font-bold text-[1.2rem] block">
+          Grade: {user.grade as number}
+        </h1>
+        <div className="text-[#6d6d6dcc] font-bold flex gap-[1rem]">
           <h1>Rating: {String(user?.rating)}</h1>
           <h1>User Points: {String(user?.points)}</h1>
         </div>
