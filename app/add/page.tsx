@@ -40,8 +40,7 @@ export default function Add() {
                 },
               })
               .then((res) => {
-                setUser(res.data);
-                alert("User Posted");
+                alert(res.data);
               })
               .catch((err) => {
                 setError(err.response.data);

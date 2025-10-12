@@ -86,9 +86,12 @@ export async function POST(req: Request) {
         "chemistry",
         "biology",
         "economics",
+        "civics",
         "history",
         "geography",
         "english",
+        "arabic",
+        "french",
       ].includes(subject)
     ) {
       return new Response("Invalid subject", { status: 400 });
@@ -128,27 +131,8 @@ export async function POST(req: Request) {
         imageUrls: filesArray as string[],
       },
     });
-    const updatedUser = await prisma.user.update({
-      where: {
-        id: decoded.id,
-      },
-      data: {
-        points: {
-          increment: 1,
-        },
-        rating: {
-          increment: 2,
-        },
-      },
-      include: {
-        posts: true,
-        followers: true,
-        following: true,
-        likedPosts: true,
-      },
-    });
 
-    return Response.json(updatedUser);
+    return new Response("Awaiting Admin Approval");
   } catch (error: any) {
     return new Response(error, { status: 500 });
   }

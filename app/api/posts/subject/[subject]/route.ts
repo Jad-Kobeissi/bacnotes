@@ -50,6 +50,9 @@ export async function GET(
         author: {
           grade: user?.grade,
         },
+        approved: {
+          equals: true,
+        },
       },
       include: {
         author: {

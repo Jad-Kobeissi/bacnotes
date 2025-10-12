@@ -27,6 +27,8 @@ export async function POST(
 
     if (!post) return new Response("Post not found", { status: 404 });
 
+    if (!post.approved)
+      return new Response("Post not approved", { status: 403 });
     if (!post.likedUsers.some((user) => user.id === decoded.id))
       return new Response("Post not liked", { status: 400 });
     await prisma.post.update({

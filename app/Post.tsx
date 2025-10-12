@@ -161,7 +161,8 @@ export default function Post({
         <div className="flex items-center justify-center mt-[3vh]">
           <button
             className="bg-[#ce1a35] text-[1.3rem] font-bold px-4 py-1 rounded-lg"
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               deletePost(post.id as string);
             }}
           >

@@ -3,7 +3,7 @@ import { decode, verify } from "jsonwebtoken";
 
 export async function POST(
   req: Request,
-  { params }: { params: Promise<{ id: String }> }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const authHeader = req.headers.get("Authorization")?.split(" ")[1];
@@ -11,60 +11,58 @@ export async function POST(
     if (!authHeader || !verify(authHeader, process.env.JWT_TOKEN as string))
       return new Response("Unauthorized", { status: 401 });
 
-    const postId = (await params).id;
+    const decoded: { id: string; username: string } = (await decode(
+      authHeader
+    )) as { id: string; username: string };
 
-    const decoded: any = await decode(authHeader);
+    console.log(decoded.username.toLowerCase() == "jad");
+
+    if (decoded.username.toLowerCase() != "jad")
+      return new Response("Unauthorized", { status: 401 });
+
+    const { id } = await params;
 
     const post = await prisma.post.findUnique({
       where: {
-        id: postId as string,
-      },
-      include: {
-        author: true,
-        likedUsers: true,
+        id,
       },
     });
 
     if (!post) return new Response("Post not found", { status: 404 });
 
-    if (!post.approved)
-      return new Response("Post not approved", { status: 403 });
+    if (post.approved)
+      return new Response("Post already approved", { status: 409 });
 
-    if (post.likedUsers.some((user) => user.id === decoded.id))
-      return new Response("Already liked", { status: 400 });
     await prisma.post.update({
       where: {
-        id: postId as string,
+        id,
       },
       data: {
-        likedUsers: {
-          connect: {
-            id: decoded.id,
-          },
-        },
-        likes: {
-          increment: 1,
-        },
+        approved: true,
       },
     });
+
     await prisma.user.update({
       where: {
         id: post.authorId,
       },
       data: {
-        rating: {
-          increment: 5,
-        },
         points: {
           increment: 1,
         },
+        rating: {
+          increment: 2,
+        },
+      },
+      include: {
+        posts: true,
+        followers: true,
+        following: true,
+        likedPosts: true,
       },
     });
-
     return Response.json(post);
   } catch (error: any) {
-    console.log(error);
-
     return new Response(error, { status: 500 });
   }
 }

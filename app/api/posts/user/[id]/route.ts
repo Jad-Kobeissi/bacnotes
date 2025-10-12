@@ -21,6 +21,9 @@ export async function GET(
         authorId: {
           equals: userId,
         },
+        approved: {
+          equals: true,
+        },
       },
       include: {
         author: {

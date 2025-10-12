@@ -31,6 +31,8 @@ export async function GET(
 
     if (!post) return new Response("No Posts Found", { status: 404 });
 
+    if (!post.approved)
+      return new Response("Post not approved", { status: 403 });
     return Response.json(post);
   } catch (error: any) {
     return new Response(error, { status: 500 });
