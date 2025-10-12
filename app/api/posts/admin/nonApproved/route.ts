@@ -10,7 +10,11 @@ export async function GET(req: Request) {
 
     const decoded: any = await decode(authHeader);
 
-    if (decoded.username != "jad") return new Response("Unauthorized");
+    const user = await prisma.user.findUnique({
+      where: { id: decoded.id },
+      select: { admin: true },
+    });
+    if (!user?.admin) return new Response("Unauthorized", { status: 401 });
 
     const url = new URL(req.url);
     const page = Number(await url.searchParams.get("page")) || 1;

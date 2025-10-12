@@ -15,10 +15,11 @@ export async function POST(
       authHeader
     )) as { id: string; username: string };
 
-    console.log(decoded.username.toLowerCase() == "jad");
-
-    if (decoded.username.toLowerCase() != "jad")
-      return new Response("Unauthorized", { status: 401 });
+    const user = await prisma.user.findUnique({
+      where: { id: decoded.id },
+      select: { admin: true },
+    });
+    if (!user?.admin) return new Response("Unauthorized", { status: 401 });
 
     const { id } = await params;
 

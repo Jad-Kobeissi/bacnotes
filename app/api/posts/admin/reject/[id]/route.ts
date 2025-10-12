@@ -13,8 +13,11 @@ export async function POST(
 
     const decoded: any = await decode(authHeader);
 
-    if (decoded.username != "jad")
-      return new Response("Unauthorized", { status: 401 });
+    const user = await prisma.user.findUnique({
+      where: { id: decoded.id },
+      select: { admin: true },
+    });
+    if (!user?.admin) return new Response("Unauthorized", { status: 401 });
 
     const { id } = await params;
 

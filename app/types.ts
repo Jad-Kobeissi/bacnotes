@@ -5,6 +5,7 @@ export interface TUser {
   followers: TUser[];
   following: TUser[];
   posts: TPost[];
+  admin: Boolean;
   grade: Number;
   points: Number;
   rating: Number;

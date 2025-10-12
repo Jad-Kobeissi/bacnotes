@@ -37,7 +37,7 @@ export default function Admin() {
   };
   useEffect(() => {
     if (!user) return;
-    if (user?.username.toLowerCase() != "jad") {
+    if (!user.admin) {
       alert("Forbidden");
       router.push("/home");
     }
