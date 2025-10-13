@@ -16,6 +16,7 @@ export async function GET(
     const user = await prisma.user.findUnique({
       where: {
         id,
+        banned: false,
       },
       include: {
         followers: true,
@@ -49,9 +50,9 @@ export async function DELETE(
       return new Response("Forbidden", { status: 403 });
     }
 
-    const post = await prisma.user.findUnique({ where: { id } });
+    const user = await prisma.user.findUnique({ where: { id } });
 
-    if (!post) {
+    if (!user) {
       return new Response("User not found", { status: 404 });
     }
     await prisma.user.delete({

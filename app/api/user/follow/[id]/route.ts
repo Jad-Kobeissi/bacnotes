@@ -17,6 +17,7 @@ export async function POST(
     const following = await prisma.user.findUnique({
       where: {
         id,
+        banned: false,
       },
       include: {
         following: true,
@@ -33,6 +34,7 @@ export async function POST(
     const follower = await prisma.user.findUnique({
       where: {
         id: decoded.id,
+        banned: false,
       },
       include: {
         followers: true,

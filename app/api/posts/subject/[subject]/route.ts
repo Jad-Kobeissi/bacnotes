@@ -38,7 +38,7 @@ export async function GET(
       return new Response("Invalid subject", { status: 400 });
     }
     const user = await prisma.user.findUnique({
-      where: { id: decoded.id },
+      where: { id: decoded.id, banned: false },
       select: { grade: true },
     });
     const posts = await prisma.post.findMany({
@@ -49,6 +49,7 @@ export async function GET(
         },
         author: {
           grade: user?.grade,
+          banned: false,
         },
         approved: {
           equals: true,

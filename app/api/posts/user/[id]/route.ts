@@ -24,6 +24,9 @@ export async function GET(
         approved: {
           equals: true,
         },
+        author: {
+          banned: false,
+        },
       },
       include: {
         author: {

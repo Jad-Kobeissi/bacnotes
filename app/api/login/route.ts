@@ -12,7 +12,7 @@ export async function POST(req: Request) {
     }
 
     const user = await prisma.user.findUnique({
-      where: { username },
+      where: { username, banned: false },
       include: {
         followers: true,
         following: true,

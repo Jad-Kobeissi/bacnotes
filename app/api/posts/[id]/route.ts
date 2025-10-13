@@ -15,7 +15,7 @@ export async function GET(
     const { id } = await params;
 
     const post = await prisma.post.findUnique({
-      where: { id },
+      where: { id, author: { banned: false } },
       include: {
         author: {
           include: {
@@ -54,7 +54,12 @@ export async function DELETE(
     const decoded: any = await decode(authHeader);
 
     const post = await prisma.post.findUnique({
-      where: { id },
+      where: {
+        id,
+        author: {
+          banned: false,
+        },
+      },
     });
     if (!post) return new Response("No Posts Found", { status: 404 });
     if (decoded.id != post.authorId)

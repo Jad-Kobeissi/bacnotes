@@ -17,6 +17,9 @@ export async function GET(req: Request) {
         authorId: {
           not: decoded.id,
         },
+        author: {
+          banned: false,
+        },
       },
       include: {
         author: {

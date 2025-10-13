@@ -16,7 +16,7 @@ export async function GET(req: Request) {
 
     const decoded: any = await decode(authHeader);
     const user = await prisma.user.findUnique({
-      where: { id: decoded.id },
+      where: { id: decoded.id, banned: false },
       select: { grade: true },
     });
     const posts = await prisma.post.findMany({
@@ -26,6 +26,7 @@ export async function GET(req: Request) {
         },
         author: {
           grade: user?.grade,
+          banned: false,
         },
         approved: {
           equals: true,

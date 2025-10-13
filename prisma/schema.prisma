@@ -23,6 +23,7 @@ model User {
   grade Int
   points Int
   rating Int
+  banned Boolean @default(false)
   admin Boolean @default(false)
   likedPosts Post[] @relation("likes")
   createdAt DateTime @default(now())

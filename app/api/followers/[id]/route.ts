@@ -16,6 +16,7 @@ export async function GET(
     const followers = await prisma.user.findUnique({
       where: {
         id,
+        banned: false,
       },
       select: {
         followers: true,

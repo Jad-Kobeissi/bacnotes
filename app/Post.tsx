@@ -50,7 +50,13 @@ export default function Post({
       onClick={() => router.push(`/post/${post.id}`)}
     >
       <div className="flex gap-[1rem]">
-        <h1 className="text-[2rem] font-bold capitalize flex items-center gap-4">
+        <h1
+          className="text-[2rem] font-bold capitalize flex items-center gap-4 hover:cursor-pointer"
+          onClick={(e) => {
+            e.stopPropagation();
+            router.push(`/user/${post.authorId}`);
+          }}
+        >
           {post.author.username}{" "}
           {post.author.admin ? (
             <p className="text-[1rem] text-[var(--secondary-text)]">admin</p>
@@ -61,7 +67,6 @@ export default function Post({
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                setFollowed(false);
                 axios
                   .post(
                     `/api/user/unfollow/${post.authorId}`,
@@ -73,8 +78,9 @@ export default function Post({
                     }
                   )
                   .then((res) => {
-                    setUser(res.data);
+                    setUser(res.data as TUser);
                   });
+                setFollowed(false);
               }}
               className="bg-[#1C6CA0] text-white font-bold px-4 py-2 rounded-xl hover:bg-transparent border-[#1C6CA0] active:bg-transparent border transition-all duration-150"
             >

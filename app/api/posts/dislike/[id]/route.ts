@@ -18,6 +18,9 @@ export async function POST(
     const post = await prisma.post.findUnique({
       where: {
         id: postId as string,
+        author: {
+          banned: false,
+        },
       },
       include: {
         author: true,

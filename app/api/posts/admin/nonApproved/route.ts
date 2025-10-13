@@ -11,7 +11,7 @@ export async function GET(req: Request) {
     const decoded: any = await decode(authHeader);
 
     const user = await prisma.user.findUnique({
-      where: { id: decoded.id },
+      where: { id: decoded.id, banned: false },
       select: { admin: true },
     });
     if (!user?.admin) return new Response("Unauthorized", { status: 401 });
@@ -23,6 +23,9 @@ export async function GET(req: Request) {
       where: {
         approved: {
           equals: false,
+        },
+        author: {
+          banned: false,
         },
       },
       take: 5,

@@ -16,7 +16,7 @@ export async function POST(
     )) as { id: string; username: string };
 
     const user = await prisma.user.findUnique({
-      where: { id: decoded.id },
+      where: { id: decoded.id, banned: false },
       select: { admin: true },
     });
     if (!user?.admin) return new Response("Unauthorized", { status: 401 });
@@ -26,6 +26,9 @@ export async function POST(
     const post = await prisma.post.findUnique({
       where: {
         id,
+        author: {
+          banned: false,
+        },
       },
     });
 

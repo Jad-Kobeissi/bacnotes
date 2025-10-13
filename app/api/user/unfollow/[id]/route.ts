@@ -33,6 +33,7 @@ export async function POST(
     const follower = await prisma.user.findUnique({
       where: {
         id: decoded.id,
+        banned: false,
       },
       include: {
         followers: true,
@@ -47,7 +48,7 @@ export async function POST(
         status: 400,
       });
     }
-    const newFollower = await prisma.user.update({
+    const user = await prisma.user.update({
       where: {
         id: decoded.id,
       },
@@ -77,8 +78,9 @@ export async function POST(
         },
       },
     });
+    console.log(user);
 
-    return Response.json(newFollower);
+    return Response.json(user);
   } catch (error: any) {
     return new Response(error, { status: 500 });
   }
