@@ -19,19 +19,18 @@ export default function Post({
   const [liked, setLiked] = useState<boolean>(false);
   const [likes, setLikes] = useState<number>(post.likes as number);
   const [followed, setFollowed] = useState<boolean>(false);
-  const { setUser } = UseUser();
+  const { setUser, user } = UseUser();
   const router = useRouter();
   useEffect(() => {
-    if (!User || !post?.author?.followers) return;
+    if (!user || !post?.author?.followers) return;
 
-    if (post.likedUsers.some((u) => u.id == User.id)) {
+    if (post.likedUsers.some((u) => u.id == user.id)) {
       setLiked(true);
     }
-    if (post.author.followers.some((u) => u.id == User.id)) {
+    if (post.author.followers.some((u) => u.id == user.id)) {
       setFollowed(true);
     }
-    console.log(User);
-  }, [User]);
+  }, [user]);
   const deletePost = async (id: string) => {
     axios
       .delete(`/api/posts/${id}`, {
@@ -60,7 +59,8 @@ export default function Post({
         {!profilePage &&
           (followed ? (
             <button
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 setFollowed(false);
                 axios
                   .post(
@@ -82,7 +82,8 @@ export default function Post({
             </button>
           ) : (
             <button
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 axios
                   .post(
                     `/api/user/follow/${post.authorId}`,
@@ -146,7 +147,8 @@ export default function Post({
           </button>
         ) : (
           <button
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               axios.post(
                 `/api/posts/like/${post.id}`,
                 {},
@@ -165,7 +167,7 @@ export default function Post({
           </button>
         )}
       </div>
-      {(profilePage || User.admin) && (
+      {(profilePage || user?.admin) && (
         <div className="flex items-center justify-center mt-[3vh]">
           <button
             className="bg-[#ce1a35] text-[1.3rem] font-bold px-4 py-1 rounded-lg"
