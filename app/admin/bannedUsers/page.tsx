@@ -7,44 +7,39 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { Error } from "@/app/Error";
-export default function Followers({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = React.use(params);
-  const [followers, setFollowers] = useState<TUser[]>([]);
+export default function Banned() {
+  const [users, setUsers] = useState<TUser[]>([]);
   const [error, setError] = useState<string>("");
   const router = useRouter();
-  const fetchFollowers = () => {
+  const fetchUsers = () => {
     axios
-      .get(`/api/followers/${id}`, {
+      .get(`/api/user/banned`, {
         headers: {
           Authorization: `Bearer ${getCookie("token")}`,
         },
       })
       .then((res) => {
-        setFollowers(res.data.followers);
+        setUsers(res.data);
       })
       .catch((err) => {
         setError(err.response.data);
       });
   };
   useEffect(() => {
-    fetchFollowers();
+    fetchUsers();
   }, []);
   return (
     <div className="pt-[20vh]">
       <Nav />
-      <h1 className="text-[2rem] font-bold text-center">Followers</h1>
+      <h1 className="text-[2rem] font-bold text-center">Banned Users</h1>
       <div className="flex justify-center mt-[10vh] gap-5">
-        {followers.map((follower) => (
+        {users.map((user) => (
           <motion.div
-            onClick={() => router.push(`/user/${follower.id}`)}
+            onClick={() => router.push(`/admin/bannedUsers/user/${user.id}`)}
             className={`bg-[#141414] w-fit h-fit rounded-xl p-[2rem] flex flex-col items-center`}
-            key={follower.id as string}
+            key={user.id as string}
           >
-            <h1 className="text-[1.3rem]">{follower.username}</h1>
+            <h1 className="text-[1.3rem]">{user.username}</h1>
           </motion.div>
         ))}
       </div>

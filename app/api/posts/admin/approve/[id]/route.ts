@@ -19,7 +19,7 @@ export async function POST(
       where: { id: decoded.id, banned: false },
       select: { admin: true },
     });
-    if (!user?.admin) return new Response("Unauthorized", { status: 401 });
+    if (!user?.admin) return new Response("Forbidden", { status: 403 });
 
     const { id } = await params;
 

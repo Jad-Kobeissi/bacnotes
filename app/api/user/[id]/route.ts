@@ -26,7 +26,7 @@ export async function GET(
       },
     });
 
-    if (!user) return new Response("Post not found", { status: 404 });
+    if (!user) return new Response("User not found", { status: 404 });
     return Response.json(user);
   } catch (error: any) {
     return new Response(error, { status: 500 });

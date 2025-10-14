@@ -1,7 +1,10 @@
 import { decode, verify } from "jsonwebtoken";
 import { prisma } from "../../../init";
 
-export async function GET(req: Request) {
+export async function POST(
+  req: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
     const authHeader = req.headers.get("Authorization")?.split(" ")[1];
 
@@ -12,34 +15,27 @@ export async function GET(req: Request) {
 
     const user = await prisma.user.findUnique({
       where: { id: decoded.id, banned: false },
-      select: { admin: true },
     });
+
     if (!user?.admin) return new Response("Forbidden", { status: 403 });
 
-    const url = new URL(req.url);
-    const page = Number(await url.searchParams.get("page")) || 1;
-    const skip = (page - 1) * 5;
-    const posts = await prisma.post.findMany({
+    const { id } = await params;
+    const unbanned = await prisma.user.findUnique({
+      where: { id, banned: true },
+    });
+
+    if (!unbanned) return new Response("User not found", { status: 404 });
+
+    const updatedUser = await prisma.user.update({
       where: {
-        approved: {
-          equals: false,
-        },
-        author: {
-          banned: false,
-        },
+        id,
       },
-      take: 5,
-      skip: skip,
-      include: {
-        author: true,
-        likedUsers: true,
+      data: {
+        banned: false,
       },
     });
 
-    if (posts.length == 0)
-      return new Response("No posts found", { status: 404 });
-
-    return Response.json(posts);
+    return Response.json(updatedUser);
   } catch (error: any) {
     return new Response(error, { status: 500 });
   }

@@ -18,9 +18,9 @@ export default function User({ params }: { params: Promise<{ id: string }> }) {
   const [page, setPage] = useState(1);
   const [error, setError] = useState<string>("");
   const [hasMore, setHasMore] = useState(true);
-  const [sUser, setUser] = useState<TUser | null>(null);
+  const [sUser, setSuser] = useState<TUser | null>(null);
   const [following, setFollowing] = useState(false);
-  const { user } = UseUser();
+  const { user, setUser } = UseUser();
   const router = useRouter();
   const fetchPosts = () => {
     axios
@@ -46,7 +46,7 @@ export default function User({ params }: { params: Promise<{ id: string }> }) {
         },
       })
       .then((res) => {
-        setUser(res.data);
+        setSuser(res.data);
       })
       .catch((err) => {
         setError(err.response.data);
@@ -76,11 +76,55 @@ export default function User({ params }: { params: Promise<{ id: string }> }) {
               {sUser?.username}
             </h1>
             {following ? (
-              <button className="bg-[var(--brand)] px-4 py-1 font-bold rounded-md border border-[var(--brand)] hover:bg-transparent transition-all duration-200">
+              <button
+                className="bg-[var(--brand)] px-4 py-1 font-bold rounded-md border border-[var(--brand)] hover:bg-transparent transition-all duration-200"
+                onClick={() => {
+                  axios
+                    .post(
+                      `/api/user/unfollow/${sUser?.id}`,
+                      {},
+                      {
+                        headers: {
+                          Authorization: `Bearer ${getCookie("token")}`,
+                        },
+                      }
+                    )
+                    .then((res) => {
+                      console.log(res.data);
+
+                      setUser(res.data);
+                      setSuser((prev: TUser | null) => {
+                        return {
+                          followers: prev?.followers.filter(
+                            (u) => u.id !== user?.id
+                          ),
+                          ...prev,
+                        } as TUser;
+                      });
+                    });
+                }}
+              >
                 Unfollow
               </button>
             ) : (
-              <button className="bg-[var(--brand)] px-4 py-1 font-bold rounded-md border border-[var(--brand)] hover:bg-transparent transition-all duration-200">
+              <button
+                className="bg-[var(--brand)] px-4 py-1 font-bold rounded-md border border-[var(--brand)] hover:bg-transparent transition-all duration-200"
+                onClick={() => {
+                  axios
+                    .post(
+                      `/api/user/follow/${sUser?.id}`,
+                      {},
+                      {
+                        headers: {
+                          Authorization: `Bearer ${getCookie("token")}`,
+                        },
+                      }
+                    )
+                    .then((res) => {
+                      setUser(res.data);
+                    });
+                }}
+              >
                 Follow
               </button>
             )}

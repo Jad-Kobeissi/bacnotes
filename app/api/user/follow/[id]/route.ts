@@ -64,7 +64,6 @@ export async function POST(
         followers: true,
         following: true,
         likedPosts: true,
-        posts: true,
       },
     });
     await prisma.user.update({

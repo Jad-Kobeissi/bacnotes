@@ -1,5 +1,5 @@
 import { decode, verify } from "jsonwebtoken";
-import { prisma } from "../../init";
+import { prisma } from "../../../init";
 
 export async function POST(
   req: Request,
@@ -13,25 +13,26 @@ export async function POST(
 
     const decoded: any = await decode(authHeader);
 
-    const user = await prisma.user.findUnique({
-      where: { id: decoded.id, banned: false },
-    });
+    const user = await prisma.user.findUnique({ where: { id: decoded.ud } });
 
-    if (!user?.admin) return new Response("Unauthorized", { status: 401 });
-
+    if (!user?.admin) return new Response("Forbidden", { status: 403 });
     const { id } = await params;
-    const unbanned = await prisma.user.findUnique({
-      where: { id, banned: false },
+
+    const bannedUser = await prisma.user.findUnique({
+      where: {
+        id,
+        banned: true,
+      },
     });
 
-    if (!unbanned) return new Response("User not found", { status: 404 });
+    if (!bannedUser) return new Response("User not found", { status: 404 });
 
     const updatedUser = await prisma.user.update({
       where: {
         id,
       },
       data: {
-        banned: false,
+        banned: true,
       },
     });
 

@@ -1,7 +1,10 @@
+import { prisma } from "@/app/api/init";
 import { decode, verify } from "jsonwebtoken";
-import { prisma } from "../../../init";
 
-export async function GET(req: Request) {
+export async function GET(
+  req: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
     const authHeader = req.headers.get("Authorization")?.split(" ")[1];
 
@@ -10,23 +13,18 @@ export async function GET(req: Request) {
 
     const decoded: any = await decode(authHeader);
 
-    const user = await prisma.user.findUnique({
-      where: { id: decoded.id, banned: false },
-      select: { admin: true },
-    });
+    const user = await prisma.user.findUnique({ where: { id: decoded.id } });
+
     if (!user?.admin) return new Response("Forbidden", { status: 403 });
 
+    const { id } = await params;
+
     const url = new URL(req.url);
-    const page = Number(await url.searchParams.get("page")) || 1;
+    const page = parseInt(url.searchParams.get("page") as string) || 1;
     const skip = (page - 1) * 5;
     const posts = await prisma.post.findMany({
       where: {
-        approved: {
-          equals: false,
-        },
-        author: {
-          banned: false,
-        },
+        authorId: id,
       },
       take: 5,
       skip: skip,
