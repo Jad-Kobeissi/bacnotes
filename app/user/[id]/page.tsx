@@ -155,6 +155,32 @@ export default function User({ params }: { params: Promise<{ id: string }> }) {
                 Ban
               </button>
             )}
+            {user?.id != sUser?.id && (
+              <button
+                className="bg-[#d60e0e] text-white font-bold px-4 py-2 rounded-xl hover:bg-transparent border-[#d60e0e] active:bg-transparent border transition-all duration-150"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  axios
+                    .post(
+                      `/api/user/report/${sUser?.id}`,
+                      {},
+                      {
+                        headers: {
+                          Authorization: `Bearer ${getCookie("token")}`,
+                        },
+                      }
+                    )
+                    .then(() => {
+                      alert("Reported");
+                    })
+                    .catch((err) => {
+                      setError(err.response.data);
+                    });
+                }}
+              >
+                Report User
+              </button>
+            )}
           </div>
           <div className="flex gap-3 text-[var(--secondary-text)]">
             <motion.h1

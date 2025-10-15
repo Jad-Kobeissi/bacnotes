@@ -13,15 +13,15 @@ export async function POST(
 
     const decoded: any = await decode(authHeader);
 
-    const user = await prisma.user.findUnique({ where: { id: decoded.ud } });
+    const user = await prisma.user.findUnique({ where: { id: decoded.id } });
 
     if (!user?.admin) return new Response("Forbidden", { status: 403 });
     const { id } = await params;
 
     const bannedUser = await prisma.user.findUnique({
       where: {
-        id,
-        banned: true,
+        id: id,
+        banned: false,
       },
     });
 

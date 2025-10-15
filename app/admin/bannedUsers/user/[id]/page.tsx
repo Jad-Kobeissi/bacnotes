@@ -61,6 +61,7 @@ export default function User({ params }: { params: Promise<{ id: string }> }) {
   };
   useEffect(() => {
     if (!user) return;
+    setPosts([]);
     fetchUser();
     fetchPosts();
   }, [user]);
@@ -108,10 +109,13 @@ export default function User({ params }: { params: Promise<{ id: string }> }) {
             loader={
               <Loading className="flex items-center justify-center mt-[30vh]" />
             }
-            className="flex flex-col items-center mt-[20vh]"
+            className="flex flex-col items-center mt-[20vh] gap-4"
           >
             {posts.map((post) => (
-              <div className="bg-[#141414] p-[2rem] rounded-md">
+              <div
+                className="bg-[#141414] p-[2rem] rounded-md"
+                key={post.id as string}
+              >
                 <h1 className="text-[1.2rem] font-semibold">
                   {post.author.username}
                 </h1>
@@ -120,6 +124,7 @@ export default function User({ params }: { params: Promise<{ id: string }> }) {
                 <div className="overflow-x-scroll snap-x snap-mandatory flex landing-md:w-[30rem] w-[17rem]">
                   {post.imageUrls.map((url) => (
                     <img
+                      key={url as string}
                       src={url as string}
                       alt="post image"
                       className="snap-center"

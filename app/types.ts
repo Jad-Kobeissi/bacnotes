@@ -24,3 +24,8 @@ export interface TPost {
   likedUsers: TUser[];
   createdAt: Date;
 }
+export interface TReport {
+  id: String;
+  user: TUser;
+  userId: String;
+}
