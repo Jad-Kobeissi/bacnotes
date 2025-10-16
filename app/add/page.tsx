@@ -57,7 +57,7 @@ export default function Add() {
             </label>
             <input
               type="text"
-              placeholder="John Doe"
+              placeholder="Title"
               ref={title}
               id="Title"
               className="px-4 py-2 rounded text-[1.3rem] bg-[var(--card-color)]"
@@ -107,7 +107,7 @@ export default function Add() {
             <input
               type="file"
               placeholder="Images"
-              accept="images/*"
+              accept="image/*"
               multiple
               ref={files}
               id="files"
