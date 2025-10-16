@@ -48,7 +48,7 @@ export default function Home() {
         <Loading className="w-screen h-screen flex items-center justify-center" />
       ) : (
         <div className="flex flex-col gap-4">
-          <div className="flex items-center justify-center gap-4">
+          <div className="flex items-center justify-center mt-[30vh] gap-4">
             <div className="flex flex-col">
               <label htmlFor="subject" className="text-[#6d6d66d]">
                 Subject
