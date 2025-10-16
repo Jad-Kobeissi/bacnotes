@@ -126,7 +126,7 @@ export default function Post({
               e.stopPropagation();
               window.open(url as string, "_blank");
             }}
-            className="snap-center"
+            className="snap-center w-[30rem]"
           />
         ))}
       </div>
