@@ -1,15 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
-import { UseUser } from "../contexts/UserContext";
+import { UseUser } from "../../contexts/UserContext";
 import { useRouter } from "next/navigation";
-import { TPost, TUser } from "../types";
+import { TPost, TUser } from "../../types";
 import InfiniteScroll from "react-infinite-scroll-component";
 import axios from "axios";
 import { getCookie } from "cookies-next";
-import Loading from "../Loading";
-import Post from "../Post";
-import { Nav } from "../Nav";
-import { Error } from "../Error";
+import Loading from "../../Loading";
+import Post from "../../Post";
+import { Nav } from "../../Nav";
+import { Error } from "../../Error";
 import Image from "next/image";
 
 export default function Admin() {
@@ -48,7 +48,7 @@ export default function Admin() {
     <>
       <Nav />
       <h1 className="text-[2rem] font-bold text-center my-[10vh]">
-        Admin Dashboard
+        Approve Posts
       </h1>
       <InfiniteScroll
         hasMore={hasMore}

@@ -76,6 +76,12 @@ export async function POST(
             id: decoded.id,
           },
         },
+        points: {
+          increment: 2,
+        },
+        rating: {
+          increment: 10,
+        },
       },
     });
 

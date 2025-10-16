@@ -14,7 +14,6 @@ export default function Add() {
   const description = useRef<HTMLInputElement>(null);
   const files = useRef<HTMLInputElement>(null);
   const [selected, setSelected] = useState("");
-  const { setUser } = UseUser();
   return (
     <>
       <Nav />
@@ -61,7 +60,7 @@ export default function Add() {
               placeholder="John Doe"
               ref={title}
               id="Title"
-              className="px-4 py-2 rounded text-[1.3rem] bg-[#121212]"
+              className="px-4 py-2 rounded text-[1.3rem] bg-[var(--card-color)]"
             />
           </div>
           <div className="flex flex-col">
@@ -73,7 +72,7 @@ export default function Add() {
               placeholder="Description"
               ref={description}
               id="description"
-              className="px-4 py-2 rounded text-[1.3rem] bg-[#121212]"
+              className="px-4 py-2 rounded text-[1.3rem] bg-[var(--card-color)]"
             />
           </div>
           <div className="flex flex-col">
@@ -81,7 +80,7 @@ export default function Add() {
               Subject
             </label>
             <select
-              className="bg-[#121212] px-4 py-2 rounded-lg"
+              className="bg-[var(--card-color)] px-4 py-2 rounded-lg"
               id="subject"
               value={selected}
               onChange={(e) => {
@@ -112,12 +111,10 @@ export default function Add() {
               multiple
               ref={files}
               id="files"
-              className="py-2 px-4 rounded bg-[#121212]"
+              className="py-2 px-4 rounded bg-[var(--card-color)]"
             />
           </div>
-          <button className="px-3 py-1 bg-[#1C6CA0] text-[1.2rem] font-bold rounded-lg">
-            Add
-          </button>
+          <button className="button">Add</button>
         </form>
       )}
     </>

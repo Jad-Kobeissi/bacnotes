@@ -57,7 +57,7 @@ export default function LogIn() {
             placeholder="John Doe"
             ref={username}
             id="username"
-            className="px-4 py-2 rounded text-[1.3rem] bg-[#11111178]"
+            className="px-4 py-2 rounded text-[1.3rem] bg-[var(--card-color)] text-[var(--secondary-text)] placeholder:text-[var(--secondary-text)]"
           />
         </div>
         <div className="flex flex-col">
@@ -69,7 +69,7 @@ export default function LogIn() {
             placeholder="Password"
             ref={password}
             id="password"
-            className="px-4 py-2 rounded text-[1.3rem] bg-[#11111178]"
+            className="px-4 py-2 rounded text-[1.3rem] bg-[var(--card-color)] text-[var(--secondary-text)] placeholder:text-[var(--secondary-text)]"
           />
         </div>
         <div className="relative group text-[#6d6d6d]">

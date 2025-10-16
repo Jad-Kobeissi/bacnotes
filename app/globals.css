@@ -2,13 +2,15 @@
 @plugin "tailwind-fluid-typography";
 
 :root {
-  --background: rgba(7, 7, 5, 0.973);
-  --foreground: #fff2eb;
-  --secondary-text: #a3a3a3;
+  --background: #f2f3f4f2;
+  --foreground: #1b1b1b;
+  --secondary-button: #1b1b1bcc;
+  --secondary-text: #1b1b1bcc;
   --divider: #dce3e9;
-  --accent: #ffb400;
+  --card-color: #1c6ca066;
   --button-text: #d9d9d9;
   --brand: #1c6ca0;
+  --danger-color: #df2222;
 }
 body {
   background: var(--background);
@@ -16,12 +18,18 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 @theme {
-  --breakpoint-landing-md: 750px;
+  --breakpoint-landing-md: 860px;
 }
 html {
   scroll-behavior: smooth;
 }
 
 .button {
-  @apply bg-[var(--brand)] hover:bg-transparent active:bg-transparent border border-[var(--brand)] text-[var(--foreground)] px-4 py-2 rounded-lg mt-2 transition-all duration-200 font-bold;
+  @apply bg-[var(--brand)] hover:bg-transparent active:bg-transparent border border-[var(--brand)] text-[var(--button-text)] px-4 py-2 rounded-lg mt-2 transition-all duration-200 font-bold;
+}
+.emphasized-text {
+  @apply text-[var(--brand)] font-bold;
+}
+button {
+  @apply text-[var(--button-text)];
 }

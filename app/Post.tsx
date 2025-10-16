@@ -45,7 +45,7 @@ export default function Post({
   };
   return (
     <div
-      className={`bg-[#141414] w-fit h-fit rounded-xl p-[2rem] flex flex-col items-center ${className}`}
+      className={`bg-[var(--card-color)] w-fit h-fit rounded-xl p-[2rem] flex flex-col items-center ${className}`}
       key={post.id as string}
       onClick={() => router.push(`/post/${post.id}`)}
     >

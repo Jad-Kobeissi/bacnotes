@@ -58,13 +58,35 @@ export default function Reports() {
       >
         {reports.map((report) => (
           <div
-            className="bg-[#141414] w-fit h-fit p-[2rem] rounded-md"
+            className="bg-[#141414] w-fit h-fit p-[2rem] rounded-md flex gap-4 "
             key={report.id as string}
             onClick={() => {
               router.push(`/user/${report.userId}`);
             }}
           >
             <h1 className="text-[1.3rem]">{report.user.username}</h1>
+            <button
+              className="bg-[#d60e0e] px-4 py-1 font-bold rounded-md border border-[#d60e0e] hover:bg-transparent transition-all duration-200"
+              onClick={(e) => {
+                e.stopPropagation();
+                axios
+                  .delete(`/api/user/reports/${report.id}`, {
+                    headers: {
+                      Authorization: `Bearer ${getCookie("token")}`,
+                    },
+                  })
+                  .then(() => {
+                    setReports((prev) =>
+                      prev.filter((r) => r.userId !== report.userId)
+                    );
+                  })
+                  .catch((err) => {
+                    setError(err.response.data);
+                  });
+              }}
+            >
+              Close
+            </button>
           </div>
         ))}
       </InfiniteScroll>

@@ -57,7 +57,7 @@ export default function Signup() {
             placeholder="John Doe"
             ref={username}
             id="username"
-            className="px-4 py-2 rounded text-[1.3rem] bg-[#11111178]"
+            className="px-4 py-2 rounded text-[1.3rem] bg-[var(--card-color)] text-[var(--secondary-text)] placeholder:text-[var(--secondary-text)]"
             min={3}
             max={20}
           />
@@ -71,7 +71,7 @@ export default function Signup() {
             placeholder="Password"
             ref={password}
             id="password"
-            className="px-4 py-2 rounded text-[1.3rem] bg-[#11111178]"
+            className="px-4 py-2 rounded text-[1.3rem] bg-[var(--card-color)] text-[var(--secondary-text)] placeholder:text-[var(--secondary-text)]"
             minLength={6}
           />
         </div>
@@ -83,7 +83,7 @@ export default function Signup() {
             type="number"
             placeholder="Grade"
             ref={grade}
-            className="bg-[#11111178] py-2 px-4 text-[1.3rem] rounded"
+            className="px-4 py-2 rounded text-[1.3rem] bg-[var(--card-color)] text-[var(--secondary-text)] placeholder:text-[var(--secondary-text)]"
             min={1}
             max={12}
             id="grade"
