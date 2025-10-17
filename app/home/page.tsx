@@ -42,64 +42,66 @@ export default function Home() {
     fetchPosts();
   }, []);
   return (
-    <div className="flex h-screen items-center justify-center flex-col gap-[2rem]">
+    <>
       <Nav />
-      {user == null ? (
-        <Loading className="w-screen h-screen flex items-center justify-center" />
-      ) : (
-        <div className="flex flex-col gap-4 my-[10vh]">
-          <div className="flex items-center justify-center mt-[30vh] gap-4">
-            <div className="flex flex-col">
-              <label htmlFor="subject" className="text-[#6d6d66d]">
-                Subject
-              </label>
-              <select
-                className="bg-[var(--card-color)] px-4 py-2 rounded-lg"
-                id="subject"
-                value={selected}
-                onChange={(e) => {
-                  setSelected(e.target.value);
-                }}
-              >
-                <option value="">Select Value</option>
-                <option value="english">English</option>
-                <option value="arabic">Arabic</option>
-                <option value="french">French</option>
-                <option value="physics">Physics</option>
-                <option value="chemistry">Chemistry</option>
-                <option value="biology">Biology</option>
-                <option value="Math">Math</option>
-                <option value="geography">Geography</option>
-                <option value="civics">Civics</option>
-                <option value="history">History</option>
-              </select>
-              <button
-                onClick={() => router.push(`/subject/${selected}`)}
-                className="button"
-              >
-                Filter
-              </button>
+      <div className="flex h-screen items-center justify-center flex-col gap-[2rem]">
+        {user == null ? (
+          <Loading className="w-screen h-screen flex items-center justify-center" />
+        ) : (
+          <div className="flex flex-col gap-4 my-[10vh]">
+            <div className="flex items-center justify-center mt-[30vh] gap-4">
+              <div className="flex flex-col">
+                <label htmlFor="subject" className="text-[#6d6d66d]">
+                  Subject
+                </label>
+                <select
+                  className="bg-[var(--card-color)] px-4 py-2 rounded-lg"
+                  id="subject"
+                  value={selected}
+                  onChange={(e) => {
+                    setSelected(e.target.value);
+                  }}
+                >
+                  <option value="">Select Value</option>
+                  <option value="english">English</option>
+                  <option value="arabic">Arabic</option>
+                  <option value="french">French</option>
+                  <option value="physics">Physics</option>
+                  <option value="chemistry">Chemistry</option>
+                  <option value="biology">Biology</option>
+                  <option value="Math">Math</option>
+                  <option value="geography">Geography</option>
+                  <option value="civics">Civics</option>
+                  <option value="history">History</option>
+                </select>
+                <button
+                  onClick={() => router.push(`/subject/${selected}`)}
+                  className="button"
+                >
+                  Filter
+                </button>
+              </div>
             </div>
+            <InfiniteScroll
+              dataLength={posts.length}
+              hasMore={hasMore}
+              loader={<Loading className="flex items-center justify-center" />}
+              next={fetchPosts}
+              className="flex items-center flex-col gap-[5vh]"
+            >
+              {posts.map((post) => (
+                <Post
+                  post={post}
+                  User={user}
+                  key={post.id as string}
+                  profilePage={false}
+                />
+              ))}
+            </InfiniteScroll>
           </div>
-          <InfiniteScroll
-            dataLength={posts.length}
-            hasMore={hasMore}
-            loader={<Loading className="flex items-center justify-center" />}
-            next={fetchPosts}
-            className="flex items-center flex-col gap-[5vh]"
-          >
-            {posts.map((post) => (
-              <Post
-                post={post}
-                User={user}
-                key={post.id as string}
-                profilePage={false}
-              />
-            ))}
-          </InfiniteScroll>
-        </div>
-      )}
-      {error && <Error error={error} className="text-[2rem] text-center" />}
-    </div>
+        )}
+        {error && <Error error={error} className="text-[2rem] text-center" />}
+      </div>
+    </>
   );
 }
