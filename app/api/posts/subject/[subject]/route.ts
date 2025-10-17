@@ -33,6 +33,9 @@ export async function GET(
         "history",
         "geography",
         "english",
+        "french",
+        "arabic",
+        "civics",
       ].includes(subject)
     ) {
       return new Response("Invalid subject", { status: 400 });
