@@ -87,8 +87,8 @@ function About() {
       ref={ref}
       id="about"
     >
-      <h1 className="text-[3rem] font-bold">What Is Bacgram?</h1>
-      <p className="w-1/2 text-center text-[var(--secondary-text)] text-[1.2rem]">
+      <h1 className="text-[3rem] font-bold text-center">What Is Bacgram?</h1>
+      <p className="landing-md:w-1/2 w-screen text-center text-[var(--secondary-text)] text-[1.2rem]">
         <span className="emphasized-text">Bacnotes</span> is a platform designed
         exclusively for BAC students, allowing you to{" "}
         <span className="emphasized-text">share notes</span> and{" "}
@@ -132,7 +132,7 @@ function Features() {
   return (
     <div className="my-[20vh]" id="features">
       <h1 className="text-[3rem] font-bold text-center">Features</h1>
-      <div className="grid grid-cols-2 place-items-center gap-4">
+      <div className="grid landing-md:grid-cols-2 grid-cols-1 place-items-center gap-4">
         <Card
           title="Security"
           description="Highest security to ensure that your web experience remains secure at all times"
