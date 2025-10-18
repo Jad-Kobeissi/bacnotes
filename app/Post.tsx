@@ -52,7 +52,7 @@ export default function Post({
       key={post.id as string}
       onClick={() => router.push(`/post/${post.id}`)}
     >
-      <div className="flex gap-[1rem]">
+      <div className="flex justify-center w-full gap-[1rem]">
         <h1
           className="text-[2rem] font-bold capitalize flex items-center gap-4 hover:cursor-pointer"
           onClick={(e) => {
