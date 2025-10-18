@@ -133,7 +133,7 @@ export default function Post({
               e.stopPropagation();
               window.open(url as string, "_blank");
             }}
-            className="snap-center w-[20rem]"
+            className="snap-center w-[20rem] aspect-square"
           />
         ))}
       </div>
