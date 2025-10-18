@@ -34,6 +34,9 @@ export async function GET(req: Request) {
         author: true,
         likedUsers: true,
       },
+      orderBy: {
+        createdAt: "asc",
+      },
     });
 
     if (posts.length == 0)

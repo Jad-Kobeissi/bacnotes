@@ -39,6 +39,9 @@ export async function GET(
       },
       skip: skip,
       take: 5,
+      orderBy: {
+        createdAt: "desc",
+      },
     });
 
     if (posts.length == 0)

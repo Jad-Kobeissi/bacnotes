@@ -61,7 +61,7 @@ export default function Admin() {
       >
         {posts.map((post) => (
           <div
-            className="bg-[var(--card-color)] w-fit h-fit p-[2rem] flex flex-col items-center justify-center gap-4 rounded-md"
+            className="bg-[var(--card-color)] w-screen h-fit p-[2rem] flex flex-col items-center justify-center gap-4 rounded-md landing-md:w-fit"
             key={post.id as string}
           >
             <h1 className="text-[1.2rem] font-bold capitalize">
@@ -69,7 +69,7 @@ export default function Admin() {
             </h1>
             <h1 className="text-[1.5rem] font-bold">Title: {post.title}</h1>
             <p>{post.description}</p>
-            <div className="overflow-x-scroll snap-x snap-mandatory flex w-[17rem] landing-md:w-[32rem]">
+            <div className="overflow-x-scroll snap-x snap-mandatory w-[20rem] flex landing-md:w-[32rem]">
               {post.imageUrls.map((url) => (
                 <img
                   src={url as string}
@@ -95,7 +95,7 @@ export default function Admin() {
                     )
                     .then((res) => {
                       alert("Approved!");
-                      setPosts((prev) => prev.filter((p) => p.id !== post.id));
+                      fetchPosts();
                     })
                     .catch((err) => {
                       setError(err.response.data);

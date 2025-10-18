@@ -123,7 +123,7 @@ export default function Post({
         {post.description}
       </p>
       <p className="text-[#6d6d6d] text-center">{post.subject}</p>
-      <div className="overflow-x-scroll snap-x snap-mandatory flex justify-center landing-md:w-[30rem] w-[17rem]">
+      <div className="overflow-x-scroll snap-x snap-mandatory flex landing-md:w-[30rem]">
         {post.imageUrls.map((url) => (
           <img
             key={url as string}
@@ -133,7 +133,7 @@ export default function Post({
               e.stopPropagation();
               window.open(url as string, "_blank");
             }}
-            className="snap-center w-[20rem] aspect-square"
+            className="snap-start w-[20rem] aspect-square"
           />
         ))}
       </div>
