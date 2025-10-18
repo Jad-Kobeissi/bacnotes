@@ -34,7 +34,7 @@ export async function POST(req: Request) {
         password: await hash(password, 10),
         points: 0,
         rating: 0,
-        grade: Number(grade),
+        grade: grade,
       },
     });
 

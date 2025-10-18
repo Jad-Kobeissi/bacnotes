@@ -95,6 +95,7 @@ export default function Admin() {
                     )
                     .then((res) => {
                       alert("Approved!");
+                      setPosts((prev) => prev.filter((p) => p.id !== post.id));
                       fetchPosts();
                     })
                     .catch((err) => {

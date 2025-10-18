@@ -11,7 +11,7 @@ import Link from "next/link";
 export default function Signup() {
   const username = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
-  const grade = useRef<HTMLInputElement>(null);
+  const [grade, setGrade] = useState("6");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const { setUser } = UseUser();
@@ -33,7 +33,7 @@ export default function Signup() {
             .post("/api/signup", {
               username: username.current?.value,
               password: password.current?.value,
-              grade: grade.current?.value,
+              grade: grade,
             })
             .then((res) => {
               setCookie("token", res.data.token);
@@ -79,15 +79,22 @@ export default function Signup() {
           <label htmlFor="grade" className="text-[#6d6d6d]">
             Grade
           </label>
-          <input
-            type="number"
-            placeholder="Grade"
-            ref={grade}
+          <select
+            value={grade}
+            onChange={(e) => setGrade(e.target.value as string)}
             className="px-4 py-2 rounded text-[1.3rem] bg-[var(--card-color)] text-[var(--secondary-text)] placeholder:text-[var(--secondary-text)]"
-            min={1}
-            max={12}
-            id="grade"
-          />
+          >
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11GLS">11GLS</option>
+            <option value="11SE">11SE</option>
+            <option value="12SE">12SE</option>
+            <option value="12GS">12GS</option>
+            <option value="12LS">12LS</option>
+          </select>
         </div>
         <div className="relative group text-[#6d6d6d]">
           <Link href={"/login"}>Already Have An Account? LogIn Here</Link>

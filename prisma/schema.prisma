@@ -20,7 +20,7 @@ model User {
   followers User[] @relation("followers")
   following User[] @relation("followers")
   posts Post[]
-  grade Int
+  grade String
   points Int
   rating Int
   banned Boolean @default(false)
