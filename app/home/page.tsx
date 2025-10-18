@@ -87,7 +87,7 @@ export default function Home() {
               hasMore={hasMore}
               loader={<Loading className="flex items-center justify-center" />}
               next={fetchPosts}
-              className="flex flex-col gap-[5vh]"
+              className="flex flex-col items-center gap-[5vh]"
             >
               {posts.map((post) => (
                 <Post
