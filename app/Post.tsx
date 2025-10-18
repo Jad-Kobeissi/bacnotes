@@ -122,8 +122,8 @@ export default function Post({
       <p className="text-center text-[var(--secondary-text)]">
         {post.description}
       </p>
-      <p className="text-[#6d6d6d]">{post.subject}</p>
-      <div className="overflow-x-scroll snap-x snap-mandatory flex landing-md:w-[30rem] w-[17rem]">
+      <p className="text-[#6d6d6d] text-center">{post.subject}</p>
+      <div className="overflow-x-scroll snap-x snap-mandatory flex justify-center landing-md:w-[30rem] w-[17rem]">
         {post.imageUrls.map((url) => (
           <img
             key={url as string}

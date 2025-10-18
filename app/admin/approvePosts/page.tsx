@@ -57,14 +57,16 @@ export default function Admin() {
           <Loading className="flex items-center justify-center mt-[30vh]" />
         }
         dataLength={posts.length}
-        className="flex justify-center w-screen "
+        className="flex justify-center w-screen flex-col items-center gap-4"
       >
         {posts.map((post) => (
           <div
-            className="bg-[#141414] w-fit h-fit p-[2rem] flex flex-col items-center justify-center gap-4"
+            className="bg-[var(--card-color)] w-fit h-fit p-[2rem] flex flex-col items-center justify-center gap-4 rounded-md"
             key={post.id as string}
           >
-            <h1 className="text-[1.2rem] font-bold">{post.author.username}</h1>
+            <h1 className="text-[1.2rem] font-bold capitalize">
+              {post.author.username}
+            </h1>
             <h1 className="text-[1.5rem] font-bold">Title: {post.title}</h1>
             <p>{post.description}</p>
             <div className="overflow-x-scroll snap-x snap-mandatory flex w-[17rem] landing-md:w-[32rem]">
