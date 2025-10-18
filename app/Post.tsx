@@ -85,7 +85,7 @@ export default function Post({
                   });
                 setFollowed(false);
               }}
-              className="bg-[#1C6CA0] text-white font-bold px-4 py-2 rounded-xl hover:bg-transparent border-[#1C6CA0] active:bg-transparent border transition-all duration-150"
+              className="bg-[#1C6CA0] text-white font-bold px-4 py-2 rounded-xl hover:bg-transparent border-[#1C6CA0] active:bg-transparent border transition-all duration-150 h-fit"
             >
               Unfollow
             </button>

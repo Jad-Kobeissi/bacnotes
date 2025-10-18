@@ -13,9 +13,10 @@ export async function POST(req: Request) {
       });
     }
 
+    const lowercaseUsername = username.toLowerCase();
     const userCheck = await prisma.user.findUnique({
       where: {
-        username,
+        username: lowercaseUsername,
       },
       include: {
         followers: true,
@@ -29,7 +30,7 @@ export async function POST(req: Request) {
 
     const user = await prisma.user.create({
       data: {
-        username,
+        username: lowercaseUsername,
         password: await hash(password, 10),
         points: 0,
         rating: 0,

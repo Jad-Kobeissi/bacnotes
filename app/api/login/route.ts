@@ -10,9 +10,10 @@ export async function POST(req: Request) {
     if (!username || !password || isEmpty([username, password])) {
       return new Response("Missing username or password", { status: 400 });
     }
+    const lowercaseUsername = username.toLowerCase();
 
     const user = await prisma.user.findUnique({
-      where: { username, banned: false },
+      where: { username: lowercaseUsername, banned: false },
       include: {
         followers: true,
         following: true,
