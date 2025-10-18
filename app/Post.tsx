@@ -3,7 +3,10 @@ import { TPost, TUser } from "./types";
 import { UseUser } from "./contexts/UserContext";
 import axios from "axios";
 import { getCookie } from "cookies-next";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 import { useRouter } from "next/navigation";
+dayjs.extend(relativeTime);
 
 export default function Post({
   post,
@@ -45,7 +48,7 @@ export default function Post({
   };
   return (
     <div
-      className={`bg-[var(--card-color)] w-fit h-fit rounded-xl p-[2rem] flex flex-col items-center ${className}`}
+      className={`bg-[var(--card-color)] w-fit h-fit rounded-xl p-[2rem] flex flex-col ${className} gap-2`}
       key={post.id as string}
       onClick={() => router.push(`/post/${post.id}`)}
     >
@@ -113,8 +116,12 @@ export default function Post({
             </button>
           ))}
       </div>
-      <h1 className="text-[1.5rem] capitalize font-bold">{post.title}</h1>
-      <p>{post.description}</p>
+      <h1 className="text-[1.5rem] capitalize font-bold text-center">
+        {post.title}
+      </h1>
+      <p className="text-center text-[var(--secondary-text)]">
+        {post.description}
+      </p>
       <p className="text-[#6d6d6d]">{post.subject}</p>
       <div className="overflow-x-scroll snap-x snap-mandatory flex landing-md:w-[30rem] w-[17rem]">
         {post.imageUrls.map((url) => (
@@ -186,6 +193,9 @@ export default function Post({
           </button>
         </div>
       )}
+      <h1 className="text-[var(--secondary-text)]">
+        {dayjs(post.createdAt).fromNow()}
+      </h1>
     </div>
   );
 }
