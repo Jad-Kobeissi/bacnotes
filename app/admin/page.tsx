@@ -19,7 +19,7 @@ export default function Admin() {
       <h1 className="text-[2rem] text-center font-bold mt-[20vh]">
         Admin Actions
       </h1>
-      <div className="flex items-center justify-center gap-4">
+      <div className="flex items-center justify-center flex-wrap gap-4">
         <button
           className="bg-[var(--brand)] px-4 py-1 font-bold rounded-md border border-[var(--brand)] hover:bg-transparent transition-all duration-200]"
           onClick={() => router.push("/admin/approvePosts")}
@@ -37,6 +37,12 @@ export default function Admin() {
           className="bg-[var(--brand)] px-4 py-1 font-bold rounded-md border border-[var(--brand)] hover:bg-transparent transition-all duration-200]"
         >
           Reports
+        </button>
+        <button
+          onClick={() => router.push("/admin/search")}
+          className="bg-[var(--brand)] px-4 py-1 font-bold rounded-md border border-[var(--brand)] hover:bg-transparent transition-all duration-200]"
+        >
+          Search Banned Users
         </button>
       </div>
     </div>
