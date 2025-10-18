@@ -36,7 +36,7 @@ export default function Banned() {
         {users.map((user) => (
           <motion.div
             onClick={() => router.push(`/admin/bannedUsers/user/${user.id}`)}
-            className={`bg-[#141414] w-fit h-fit rounded-xl p-[2rem] flex flex-col items-center`}
+            className={`bg-[var(--card-color)] w-fit h-fit rounded-xl p-[2rem] flex flex-col items-center`}
             key={user.id as string}
           >
             <h1 className="text-[1.3rem]">{user.username}</h1>

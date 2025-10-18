@@ -52,7 +52,7 @@ export default function Post({
       key={post.id as string}
       onClick={() => router.push(`/post/${post.id}`)}
     >
-      <div className="flex justify-center w-full gap-[1rem]">
+      <div className="flex items-center w-full gap-[1rem]">
         <h1
           className="text-[2rem] font-bold capitalize flex items-center gap-4 hover:cursor-pointer"
           onClick={(e) => {
@@ -110,12 +110,40 @@ export default function Post({
                   .catch((err) => console.log(err));
                 setFollowed(true);
               }}
-              className="bg-[#1C6CA0] text-white font-bold px-4 py-2 rounded-xl hover:bg-transparent border-[#1C6CA0] active:bg-transparent border transition-all duration-150"
+              className="bg-[#1C6CA0] text-white font-bold px-4 py-2 rounded-xl hover:bg-transparent border-[#1C6CA0] active:bg-transparent border transition-all duration-150 h-fit"
             >
               Follow
             </button>
           ))}
       </div>
+      {!profilePage && (
+        <button
+          className="bg-[var(--danger-red)] px-4 py-1 text-font text-[1.2rem] font-bold rounded-md border-[var(--danger-red)] hover:bg-transparent active:bg-transparent transition duration-200 w-fit"
+          onClick={(e) => {
+            e.stopPropagation();
+            axios
+              .post(
+                `/api/user/reports/${post.authorId}`,
+                {},
+                {
+                  headers: {
+                    Authorization: `Bearer ${getCookie("token")}`,
+                  },
+                }
+              )
+              .then((res) => {
+                alert("Reported");
+              })
+              .catch((err) => {
+                if (err.response.status == 400) {
+                  alert(err.response.data);
+                }
+              });
+          }}
+        >
+          Report
+        </button>
+      )}
       <h1 className="text-[1.5rem] capitalize font-bold text-center">
         {post.title}
       </h1>

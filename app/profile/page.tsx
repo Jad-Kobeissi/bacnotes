@@ -54,7 +54,7 @@ export default function Profile() {
         className=" bg-transparent backdrop-blur-2xl text-white w-screen h-screen absolute top-0 left-0"
       >
         <div className="flex flex-col items-center justify-center h-screen gap-[2rem]">
-          <div className="bg-[#141414] p-[2rem] rounded flex flex-col gap-[2rem] items-center">
+          <div className="bg-[var(--card-color)] p-[2rem] rounded flex flex-col gap-[2rem] items-center">
             <h1 className="text-[2rem]">
               Are you sure you want to delete your account?
             </h1>
@@ -77,7 +77,7 @@ export default function Profile() {
                 Delete
               </button>
               <button
-                className="bg-[#121212] text-[1.2rem] font-bold rounded px-3 py-1 text-[#d9d9d9] hover:bg-transparent border border-[#141414] transition-all duration-200"
+                className="bg-[#121212] text-[1.2rem] font-bold rounded px-3 py-1 text-[#d9d9d9] hover:bg-transparent border border-[#121212] transition-all duration-200"
                 onClick={() => setDeleteModal(false)}
               >
                 Close

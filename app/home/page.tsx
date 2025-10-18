@@ -44,7 +44,7 @@ export default function Home() {
   return (
     <>
       <Nav />
-      <div className="flex h-screen items-center justify-center flex-col gap-[2rem]">
+      <div className="flex justify-center flex-col gap-[2rem]">
         {user == null ? (
           <Loading className="w-screen h-screen flex items-center justify-center" />
         ) : (
@@ -87,7 +87,7 @@ export default function Home() {
               hasMore={hasMore}
               loader={<Loading className="flex items-center justify-center" />}
               next={fetchPosts}
-              className="flex items-center flex-col gap-[5vh]"
+              className="flex flex-col gap-[5vh]"
             >
               {posts.map((post) => (
                 <Post

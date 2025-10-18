@@ -106,7 +106,7 @@ export default function Admin() {
               </button>
               <h1 className="text-[1.2rem] font-bold">OR</h1>
               <button
-                className="bg-[#d60e0e] py-2 px-6 font-bold rounded-md"
+                className="bg-[var(--danger-red)] py-2 px-6 font-bold rounded-md"
                 onClick={() => {
                   axios
                     .post(

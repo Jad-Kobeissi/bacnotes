@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 export function Nav() {
   const router = useRouter();
   return (
-    <nav className="fixed top-0 w-screen flex items-center justify-between px-[2vw] z-50 mb-[10vh]">
+    <nav className="fixed top-0 w-screen flex items-center justify-between px-[2vw] z-50 mb-[10vh] bg-[var(--background)]">
       <h1 className="text-[1.5rem] font-bold cursor-pointer">Bacgram</h1>
       <div className="flex items-center justify-center gap-[2vw] text-[1.2rem]">
         <div className="relative group">

@@ -10,7 +10,8 @@
   --card-color: #1c6ca066;
   --button-text: #d9d9d9;
   --brand: #1c6ca0;
-  --danger-color: #df2222;
+  --danger-red: #d60e0e;
+  --green-color: #0ec73c;
 }
 body {
   background: var(--background);
@@ -25,7 +26,7 @@ html {
 }
 
 .button {
-  @apply bg-[var(--brand)] hover:bg-transparent active:bg-transparent border border-[var(--brand)] text-[var(--button-text)] px-4 py-2 rounded-lg mt-2 transition-all duration-200 font-bold;
+  @apply bg-[var(--brand)] hover:bg-transparent active:bg-transparent border border-[var(--brand)] text-[var(--button-text)] px-4 py-2 rounded-lg mt-2 transition-all duration-200 font-bold h-fit;
 }
 .emphasized-text {
   @apply text-[var(--brand)] font-bold;

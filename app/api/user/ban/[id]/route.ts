@@ -27,6 +27,19 @@ export async function POST(
 
     if (!bannedUser) return new Response("User not found", { status: 404 });
 
+    const report = await prisma.report.findFirst({
+      where: {
+        userId: id,
+      },
+    });
+
+    if (report) {
+      await prisma.report.delete({
+        where: {
+          userId: id,
+        },
+      });
+    }
     const updatedUser = await prisma.user.update({
       where: {
         id,

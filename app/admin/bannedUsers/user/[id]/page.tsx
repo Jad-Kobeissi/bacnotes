@@ -76,7 +76,7 @@ export default function User({ params }: { params: Promise<{ id: string }> }) {
             <div className="flex gap-4">
               <h1 className="text-[1.5rem] font-bold">{sUser?.username}</h1>
               <button
-                className="bg-[#121212] px-4 py-1 font-bold rounded-md"
+                className="bg-[var(--danger-red)] px-4 py-1 font-bold rounded-md"
                 onClick={() => {
                   axios
                     .post(
@@ -113,7 +113,7 @@ export default function User({ params }: { params: Promise<{ id: string }> }) {
           >
             {posts.map((post) => (
               <div
-                className="bg-[#141414] p-[2rem] rounded-md"
+                className="bg-[var(--card-color)] p-[2rem] rounded-md"
                 key={post.id as string}
               >
                 <h1 className="text-[1.2rem] font-semibold">

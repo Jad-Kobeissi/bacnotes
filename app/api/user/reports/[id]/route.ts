@@ -26,6 +26,14 @@ export async function POST(
 
     if (!user) return new Response("User not found", { status: 404 });
 
+    const reportCheck = await prisma.report.findFirst({
+      where: {
+        userId: id,
+      },
+    });
+
+    if (reportCheck)
+      return new Response("User already reported", { status: 400 });
     const report = await prisma.report.create({
       data: {
         userId: id,

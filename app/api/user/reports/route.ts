@@ -28,7 +28,8 @@ export async function GET(req: Request) {
       },
     });
 
-    if (!reports) return new Response("No reports found", { status: 404 });
+    if (reports.length == 0)
+      return new Response("No reports found", { status: 404 });
     return Response.json(reports);
   } catch (error: any) {
     return new Response(error, { status: 500 });

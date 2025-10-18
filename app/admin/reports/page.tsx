@@ -36,7 +36,6 @@ export default function Reports() {
       .catch((err) => {
         setError(err.response.data);
         setHasMore(false);
-        console.log(err.response.data);
       });
   };
 
@@ -58,7 +57,7 @@ export default function Reports() {
       >
         {reports.map((report) => (
           <div
-            className="bg-[#141414] w-fit h-fit p-[2rem] rounded-md flex gap-4 "
+            className="bg-[var(--card-color)] w-fit h-fit p-[2rem] rounded-md flex gap-4 "
             key={report.id as string}
             onClick={() => {
               router.push(`/user/${report.userId}`);
@@ -66,7 +65,7 @@ export default function Reports() {
           >
             <h1 className="text-[1.3rem]">{report.user.username}</h1>
             <button
-              className="bg-[#d60e0e] px-4 py-1 font-bold rounded-md border border-[#d60e0e] hover:bg-transparent transition-all duration-200"
+              className="bg-[var(--danger-red)] px-4 py-1 font-bold rounded-md border border-[var(--danger-red)] hover:bg-transparent transition-all duration-200"
               onClick={(e) => {
                 e.stopPropagation();
                 axios
