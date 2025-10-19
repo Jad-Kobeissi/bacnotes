@@ -1,5 +1,5 @@
 import { prisma } from "@/app/api/init";
-import { verify } from "jsonwebtoken";
+import { decode, verify } from "jsonwebtoken";
 import Fuse from "fuse.js";
 export async function GET(
   req: Request,
@@ -12,6 +12,7 @@ export async function GET(
       return new Response("Unauthorized", { status: 401 });
     }
 
+    const decoded: any = await decode(authHeader);
     const url = new URL(req.url);
     const page = parseInt(url.searchParams.get("page") as string) || 1;
 
@@ -21,6 +22,9 @@ export async function GET(
     const users = await prisma.user.findMany({
       where: {
         banned: false,
+        username: {
+          not: decoded.username,
+        },
       },
       skip: skip,
       take: 5,
