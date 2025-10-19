@@ -73,16 +73,18 @@ export async function DELETE(
       const imageUrl = ref(storage, url);
       await deleteObject(imageUrl);
     });
+    const pointsToSubtract = 1 + post.likes;
+    const ratingToSubtract = 2 + post.likes * 5;
     const updatedUser = await prisma.user.update({
       where: {
         id: decoded.id,
       },
       data: {
         points: {
-          decrement: 1,
+          decrement: pointsToSubtract,
         },
         rating: {
-          decrement: 2,
+          decrement: ratingToSubtract,
         },
       },
       include: {
