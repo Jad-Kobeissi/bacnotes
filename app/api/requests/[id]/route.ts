@@ -13,10 +13,13 @@ export async function GET(
 
     const { id } = await params;
     const request = await prisma.request.findUnique({
-      where: { id },
+      where: { id, approved: true },
       include: {
         author: true,
         responses: {
+          where: {
+            approved: true,
+          },
           include: {
             author: true,
           },

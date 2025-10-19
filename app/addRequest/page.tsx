@@ -52,7 +52,7 @@ export default function Add() {
                   }
                 )
                 .then((res) => {
-                  alert("Request Added");
+                  alert("Awaiting Admin Approval");
                 })
                 .catch((err) => {
                   setError(err.response.data);

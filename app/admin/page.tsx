@@ -27,6 +27,12 @@ export default function Admin() {
           Approve Posts
         </button>
         <button
+          onClick={() => router.push("/admin/approveRequests")}
+          className="bg-[var(--brand)] px-4 py-1 font-bold rounded-md border border-[var(--brand)] hover:bg-transparent transition-all duration-200]"
+        >
+          Approve Requests
+        </button>
+        <button
           onClick={() => router.push("/admin/bannedUsers")}
           className="bg-[var(--brand)] px-4 py-1 font-bold rounded-md border border-[var(--brand)] hover:bg-transparent transition-all duration-200]"
         >

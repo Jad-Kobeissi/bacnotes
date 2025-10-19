@@ -1,40 +1,32 @@
-import { prisma } from "@/app/api/init";
 import { verify } from "jsonwebtoken";
+import { prisma } from "../../init";
 
-export async function GET(
-  req: Request,
-  { params }: { params: Promise<{ id: string }> }
-) {
+export async function GET(req: Request) {
   try {
     const authHeader = req.headers.get("Authorization")?.split(" ")[1];
 
     if (!authHeader || !verify(authHeader, process.env.JWT_TOKEN as string))
       return new Response("Unauthorized", { status: 401 });
 
-    const { id } = await params;
-
     const url = new URL(req.url);
     const page = parseInt(url.searchParams.get("page") as string) || 1;
     const skip = (page - 1) * 5;
-    const requests = await prisma.request.findMany({
+    const responses = await prisma.response.findMany({
       where: {
-        authorId: id,
-        approved: true,
+        approved: false,
+      },
+      include: {
+        request: true,
+        author: true,
       },
       take: 5,
       skip: skip,
-      orderBy: {
-        createdAt: "desc",
-      },
-      include: {
-        author: true,
-      },
     });
 
-    if (requests.length == 0)
-      return new Response("No Requests Found", { status: 404 });
+    if (responses.length == 0)
+      return new Response("No responses found", { status: 404 });
 
-    return Response.json(requests);
+    return Response.json(responses);
   } catch (error: any) {
     return new Response(error, { status: 500 });
   }

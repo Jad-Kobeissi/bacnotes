@@ -34,7 +34,7 @@ export default function Reply({ params }: { params: Promise<{ id: string }> }) {
               },
             })
             .then((res) => {
-              alert("Responded");
+              alert("Awaiting Admin Approval");
               router.back();
             })
             .catch((err) => {

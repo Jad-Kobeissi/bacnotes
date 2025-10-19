@@ -31,6 +31,7 @@ export async function GET(req: Request) {
             equals: user?.grade,
           },
         },
+        approved: true,
       },
       take: 5,
       skip: skip,
