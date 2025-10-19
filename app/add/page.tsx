@@ -6,12 +6,13 @@ import Loading from "../Loading";
 import { Error } from "../Error";
 import { getCookie } from "cookies-next";
 import { UseUser } from "../contexts/UserContext";
+import Link from "next/link";
 
 export default function Add() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const title = useRef<HTMLInputElement>(null);
-  const description = useRef<HTMLInputElement>(null);
+  const description = useRef<HTMLTextAreaElement>(null);
   const files = useRef<HTMLInputElement>(null);
   const [selected, setSelected] = useState("");
   return (
@@ -50,6 +51,12 @@ export default function Add() {
           }}
         >
           <h1 className="text-[2rem] font-bold">Add</h1>
+          <div className="text-[1.5rem] flex gap-7 font-bold">
+            <Link href={"/add"}>Add Post</Link>
+            <Link href={"/addRequest"} className="text-[var(--secondary-text)]">
+              Make Request
+            </Link>
+          </div>
           {error && <Error error={error} />}
           <div className="flex flex-col">
             <label htmlFor="title" className="text-[#6d6d66d]">
@@ -67,8 +74,7 @@ export default function Add() {
             <label htmlFor="description" className="text-[#6d6d66d]">
               Description
             </label>
-            <input
-              type="text"
+            <textarea
               placeholder="Description"
               ref={description}
               id="description"

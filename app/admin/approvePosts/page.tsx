@@ -69,12 +69,12 @@ export default function Admin() {
             </h1>
             <h1 className="text-[1.5rem] font-bold">Title: {post.title}</h1>
             <p>{post.description}</p>
-            <div className="overflow-x-scroll snap-x snap-mandatory w-[20rem] flex landing-md:w-[32rem]">
+            <div className="overflow-x-scroll snap-x snap-mandatory w-[20rem] flex">
               {post.imageUrls.map((url) => (
                 <img
                   src={url as string}
                   alt="Post image"
-                  className="snap-center"
+                  className="snap-center w-[15rem]"
                   key={url as string}
                 ></img>
               ))}

@@ -53,21 +53,21 @@ model Report {
 model Request {
   id String @id @default(uuid())
   author User @relation("requests", fields: [authorId], references: [id])
-authorId String
-title String
-description String
-subject String
-responses Response[]
-createdAt DateTime
+  authorId String
+  title String
+  description String
+  subject String
+  responses Response[]
+  createdAt DateTime @default(now())
 }
 model Response {
   id String @id @default(uuid())
-request Request @relation(references: [id], fields: [requestId])
-requestId String
-author User @relation(references: [id], fields: [authorId])
-authorId String
-title String
-description String
-subject String
-createdAt DateTime
+  request Request @relation(references: [id], fields: [requestId])
+  requestId String
+  author User @relation(references: [id], fields: [authorId])
+  authorId String
+  title String
+  description String
+  imageUrls String[]
+  createdAt DateTime @default(now())
 }

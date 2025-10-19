@@ -121,13 +121,13 @@ export default function User({ params }: { params: Promise<{ id: string }> }) {
                 </h1>
                 <h1 className="text-[1.4rem] font-bold">{post.title}</h1>
                 <p>{post.description}</p>
-                <div className="overflow-x-scroll snap-x snap-mandatory flex landing-md:w-[30rem] w-[17rem]">
+                <div className="overflow-x-scroll snap-x snap-mandatory flex w-[20rem]">
                   {post.imageUrls.map((url) => (
                     <img
                       key={url as string}
                       src={url as string}
                       alt="post image"
-                      className="snap-center"
+                      className="snap-center w-[15rem]"
                     />
                   ))}
                 </div>

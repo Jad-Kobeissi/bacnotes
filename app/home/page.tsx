@@ -10,6 +10,7 @@ import { getCookie } from "cookies-next";
 import { Nav } from "../Nav";
 import Post from "../Post";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Home() {
   const { user } = useContext(UserContext) as UserContextType;
@@ -49,7 +50,16 @@ export default function Home() {
           <Loading className="w-screen h-screen flex items-center justify-center" />
         ) : (
           <div className="flex flex-col gap-4 my-[10vh]">
-            <div className="flex items-center justify-center mt-[30vh] gap-4">
+            <h1 className="text-[2rem] font-bold text-center">
+              Welcome {user.username}
+            </h1>
+            <div className="flex gap-7 items-center justify-center text-[1.5rem] font-bold">
+              <Link href={"/home"}>Posts</Link>
+              <Link href={"/requests"} className="text-[var(--secondary-text)]">
+                Requests
+              </Link>
+            </div>
+            <div className="flex items-center justify-center mt-[10vh] gap-4">
               <div className="flex flex-col">
                 <label htmlFor="subject" className="text-[#6d6d66d]">
                   Subject

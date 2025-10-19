@@ -29,3 +29,25 @@ export interface TReport {
   user: TUser;
   userId: String;
 }
+export interface TRequest {
+  id: String;
+  author: TUser;
+  authorId: String;
+  title: String;
+  description: String;
+  subject: String;
+  responses: TResponse[];
+  createdAt: Date;
+}
+export interface TResponse {
+  id: String;
+  request: TRequest;
+  requestId: String;
+  author: TUser;
+  authorId: String;
+  title: String;
+  description: String;
+  subject: String;
+  imageUrls: String[];
+  createdAt: Date;
+}

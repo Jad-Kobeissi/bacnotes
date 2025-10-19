@@ -1,14 +1,18 @@
 "use client";
 import { useContext, useEffect, useState } from "react";
-import { UserContext, UserContextType, UseUser } from "../contexts/UserContext";
-import { TPost, TUser } from "../types";
+import {
+  UserContext,
+  UserContextType,
+  UseUser,
+} from "../../contexts/UserContext";
+import { TPost, TRequest, TUser } from "../../types";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Loading from "../Loading";
+import Loading from "../../Loading";
 import axios from "axios";
-import { Error } from "../Error";
+import { Error } from "../../Error";
 import { getCookie } from "cookies-next";
-import { Nav } from "../Nav";
-import Post from "../Post";
+import { Nav } from "../../Nav";
+import Post from "../../Post";
 import { useRouter } from "next/navigation";
 import { Dialog } from "@headlessui/react";
 import Link from "next/link";
@@ -17,14 +21,14 @@ export default function Profile() {
   const { user } = useContext(UserContext) as UserContextType;
   const [error, setError] = useState("");
   const [hasMore, setHasMore] = useState(true);
-  const [posts, setPosts] = useState<TPost[]>([]);
+  const [posts, setPosts] = useState<TRequest[]>([]);
   const [page, setPage] = useState(1);
   let [deleteModal, setDeleteModal] = useState(false);
   const fetchPosts = async () => {
     setError("");
     setHasMore(true);
     await axios
-      .get(`/api/posts/user/${user?.id}?page=${page}`, {
+      .get(`/api/requests/user/${user?.id}?page=${page}`, {
         headers: {
           Authorization: `Bearer ${getCookie("token")}`,
         },
@@ -116,13 +120,10 @@ export default function Profile() {
           <h1>Following: {user.following ? user.following.length : 0}</h1>
         </div>
         <div className="text-[2rem] font-bold flex gap-6">
-          <Link href={"/posts"}>Posts</Link>
-          <Link
-            href={"/profile/requests"}
-            className="text-[var(--secondary-text)]"
-          >
-            Requests
+          <Link href={"/posts"} className="text-[var(--secondary-text)]">
+            Posts
           </Link>
+          <Link href={"/profile/requests"}>Requests</Link>
         </div>
       </div>
       <InfiniteScroll
@@ -135,12 +136,16 @@ export default function Profile() {
         className="flex items-center flex-col gap-[5vh] mt-[10vh]"
       >
         {posts.map((post) => (
-          <Post
-            key={post.id as string}
-            post={post}
-            User={user as TUser}
-            profilePage={true}
-          />
+          <div
+            className="bg-[var(--card-color)] p-[2rem] max-w-[20rem]"
+            onClick={() => {
+              router.push(`/requests/${post.id}`);
+            }}
+          >
+            <h1 className="text-[1.1rem]">{post.author.username}</h1>
+            <h1 className="text-[1.4rem] font-bold">{post.title}</h1>
+            <p className="truncate">{post.description}</p>
+          </div>
         ))}
       </InfiniteScroll>
       {error && <Error error={error} className="text-[2rem] text-center" />}
