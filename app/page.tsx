@@ -43,11 +43,13 @@ function Home() {
       initial={{ opacity: 0, y: 100 }}
       animate={{ opacity: inView ? 1 : 0, y: 0 }}
       transition={{ duration: 0.4 }}
-      className="flex landing-md:flex-row flex-col-reverse h-screen items-center landing-md:justify-between px-10 gap-9"
+      className="flex landing-md:flex-row flex-col-reverse pt-[30vh] landing-md:justify-between px-10 gap-9 items-center"
       id="home"
     >
       <div className="landing-md:w-1/2 flex items-start justify-center flex-col gap-4">
-        <h1 className="text-[3rem] font-bold">Welcome To Bacnotes</h1>
+        <h1 className="text-[3rem] font-bold">
+          Stop Stressing. Start thriving
+        </h1>
         <p className="text-[var(--secondary-text)]">
           Share, discover, and collaborate on notes with your classmates. This
           app is BAC students’ private space to upload notes, access helpful
@@ -56,7 +58,7 @@ function Home() {
         <div className="flex gap-4 items-center justify-center">
           <Link
             href={"/signup"}
-            className="bg-[var(--brand)] text-[var(--button-text)] px-5 py-1 rounded-md font-bold text-[1.3rem] border border-[var(--brand)] hover:bg-transparent hover:emphasized-text active:bg-transparent active:emphasized-text transition duration-200"
+            className="bg-[var(--brand)] text-[var(--button-text)] px-5 py-1 rounded-md font-bold text-[1.2rem] border border-[var(--brand)] hover:bg-transparent hover:emphasized-text active:bg-transparent active:emphasized-text transition duration-200"
           >
             Get Started
           </Link>
@@ -69,7 +71,11 @@ function Home() {
           </Link>
         </div>
       </div>
-      <img src="/notes.png" alt="Bacnotes picture" className="w-[30rem]" />
+      <img
+        src="/notes.png"
+        alt="Bacnotes picture"
+        className="w-[30rem] aspect-square"
+      />
     </motion.div>
   );
 }
