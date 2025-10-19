@@ -13,7 +13,7 @@ function Nav() {
         href={"#home"}
         className="text-[var(--foreground)] text-[1.5rem] font-bold"
       >
-        Bacgram
+        Bacnotes
       </Link>
       <div className="flex items-center justify-center gap-4">
         <div className="relative group">
@@ -47,7 +47,7 @@ function Home() {
       id="home"
     >
       <div className="landing-md:w-1/2 flex items-start justify-center flex-col gap-4">
-        <h1 className="text-[3rem] font-bold">Welcome To Bacgram</h1>
+        <h1 className="text-[3rem] font-bold">Welcome To Bacnotes</h1>
         <p className="text-[var(--secondary-text)]">
           Share, discover, and collaborate on notes with your classmates. This
           app is BAC students’ private space to upload notes, access helpful
@@ -87,7 +87,7 @@ function About() {
       ref={ref}
       id="about"
     >
-      <h1 className="text-[3rem] font-bold text-center">What Is Bacgram?</h1>
+      <h1 className="text-[3rem] font-bold text-center">What Is Bacnotes?</h1>
       <p className="landing-md:w-1/2 w-screen text-center text-[var(--secondary-text)] text-[1.2rem]">
         <span className="emphasized-text">Bacnotes</span> is a platform designed
         exclusively for BAC students, allowing you to{" "}
