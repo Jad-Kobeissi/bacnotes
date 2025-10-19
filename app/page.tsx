@@ -47,7 +47,7 @@ function Home() {
       id="home"
     >
       <div className="landing-md:w-1/2 flex items-start justify-center flex-col gap-4">
-        <h1 className="text-[3rem] font-bold">
+        <h1 className="text-[2rem] font-bold landing-md:text-[2.5rem]">
           Stop Stressing. Start thriving
         </h1>
         <p className="text-[var(--secondary-text)]">
@@ -84,17 +84,31 @@ function About() {
     triggerOnce: true,
     threshold: 0.5,
   });
+  const [ref2, inView2] = useInView({
+    triggerOnce: true,
+    threshold: 0.5,
+  });
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 100 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.4 }}
-      className="flex flex-col items-center justify-center my-[20vh]"
-      ref={ref}
+    <div
+      className="flex flex-col items-center justify-center my-[40vh]"
       id="about"
     >
-      <h1 className="text-[3rem] font-bold text-center">What Is Bacnotes?</h1>
-      <p className="landing-md:w-1/2 w-screen text-center text-[var(--secondary-text)] text-[1.2rem]">
+      <motion.h1
+        initial={{ opacity: 0, y: 100 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.4 }}
+        ref={ref}
+        className="text-[3rem] font-bold text-center"
+      >
+        What Is Bacnotes?
+      </motion.h1>
+      <motion.p
+        initial={{ opacity: 0, y: 100 }}
+        animate={inView2 ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.4, delay: 0.2 }}
+        ref={ref2}
+        className="landing-md:w-1/2 w-screen text-center text-[var(--secondary-text)] text-[1.2rem]"
+      >
         <span className="emphasized-text">Bacnotes</span> is a platform designed
         exclusively for BAC students, allowing you to{" "}
         <span className="emphasized-text">share notes</span> and{" "}
@@ -103,18 +117,20 @@ function About() {
         finding notes from classmates, 
         <span className="emphasized-text">Bacnotes</span> helps bring the
         student community closer together throughout the school year.
-      </p>
-    </motion.div>
+      </motion.p>
+    </div>
   );
 }
 function Card({
   title,
   description,
   Svg,
+  delay,
 }: {
   title: string;
   description: string;
   Svg: any;
+  delay: number;
 }) {
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -125,7 +141,7 @@ function Card({
       ref={ref}
       initial={{ opacity: 0, y: 100 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.4 }}
+      transition={{ duration: 0.4, delay: delay }}
       className="bg-[var(--card-color)] w-[20rem] h-fit rounded-md py-[2rem] px-4"
     >
       <Svg />
@@ -143,21 +159,25 @@ function Features() {
           title="Security"
           description="Highest security to ensure that your web experience remains secure at all times"
           Svg={Lock}
+          delay={0}
         />
         <Card
           title="Likes"
           description="Users can like posts to engage with the creator"
           Svg={Heart}
+          delay={0.2}
         />
         <Card
           title="Post Creation"
           description="Users can create posts, with an image option being available"
           Svg={Plus}
+          delay={0.4}
         />
         <Card
           title="Profile"
           description="User profiles are available with username, grade and followers"
           Svg={User}
+          delay={0.6}
         />
       </div>
     </div>
