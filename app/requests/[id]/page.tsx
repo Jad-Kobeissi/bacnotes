@@ -42,7 +42,7 @@ export default function Request({
   ) : (
     <>
       <Nav />
-      <div className="flex flex-col justify-center px-10 mt-[30vh]">
+      <div className="flex flex-col items-center px-10 mt-[30vh]">
         <h1 className="text-[1.3rem] font-semibold text-left">
           {request?.author.username}
         </h1>

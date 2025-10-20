@@ -1,11 +1,7 @@
 "use client";
 import { useContext, useEffect, useState } from "react";
-import {
-  UserContext,
-  UserContextType,
-  UseUser,
-} from "../../contexts/UserContext";
-import { TPost, TRequest, TUser } from "../../types";
+import { UserContext, UserContextType } from "../../contexts/UserContext";
+import { TRequest } from "../../types";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Loading from "../../Loading";
 import axios from "axios";
@@ -17,7 +13,7 @@ import { useRouter } from "next/navigation";
 import { Dialog } from "@headlessui/react";
 import Link from "next/link";
 
-export default function Profile() {
+export default function Requests() {
   const { user } = useContext(UserContext) as UserContextType;
   const [error, setError] = useState("");
   const [hasMore, setHasMore] = useState(true);
@@ -53,44 +49,6 @@ export default function Profile() {
   return user ? (
     <>
       <Nav />
-      <Dialog
-        open={deleteModal}
-        onClose={() => setDeleteModal(false)}
-        className=" bg-transparent backdrop-blur-2xl text-white w-screen h-screen absolute top-0 left-0"
-      >
-        <div className="flex flex-col items-center justify-center h-screen gap-[2rem]">
-          <div className="bg-[var(--card-color)] p-[2rem] rounded flex flex-col gap-[2rem] items-center">
-            <h1 className="text-[2rem]">
-              Are you sure you want to delete your account?
-            </h1>
-            <div className="flex items-center gap-[2rem]">
-              <button
-                onClick={() => {
-                  axios
-                    .delete(`/api/user/${user.id}`, {
-                      headers: {
-                        Authorization: `Bearer ${getCookie("token")}`,
-                      },
-                    })
-                    .then((res) => {
-                      router.push("/");
-                      localStorage.clear();
-                    });
-                }}
-                className="bg-[#ce1a35] text-[1.2rem] font-bold rounded px-3 py-1 text-[#d9d9d9] hover:bg-transparent border border-[#ce1a35] transition-all duration-200"
-              >
-                Delete
-              </button>
-              <button
-                className="bg-[#121212] text-[1.2rem] font-bold rounded px-3 py-1 text-[#d9d9d9] hover:bg-transparent border border-[#121212] transition-all duration-200"
-                onClick={() => setDeleteModal(false)}
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      </Dialog>
       <div className="my-[10vh] flex items-center justify-center flex-col">
         <div className="flex items-center gap-[2rem]">
           <h1 className="text-[2rem] font-bold capitalize flex items-center gap-4">
