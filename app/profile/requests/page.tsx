@@ -120,7 +120,7 @@ export default function Profile() {
           <h1>Following: {user.following ? user.following.length : 0}</h1>
         </div>
         <div className="text-[2rem] font-bold flex gap-6">
-          <Link href={"/posts"} className="text-[var(--secondary-text)]">
+          <Link href={"/profile"} className="text-[var(--secondary-text)]">
             Posts
           </Link>
           <Link href={"/profile/requests"}>Requests</Link>
