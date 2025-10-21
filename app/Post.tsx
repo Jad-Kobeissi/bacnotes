@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { TPost, TUser } from "./types";
 import { UseUser } from "./contexts/UserContext";
 import axios from "axios";
@@ -64,6 +64,9 @@ export default function Post({
           {post.author.admin ? (
             <p className="text-[1rem] text-[var(--secondary-text)]">admin</p>
           ) : null}
+          <p className="text-[1rem] text-[var(--secondary-text)]">
+            Rating: {post.author.rating as ReactNode}
+          </p>
         </h1>
         {!profilePage &&
           (followed ? (
