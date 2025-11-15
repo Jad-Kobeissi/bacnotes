@@ -50,6 +50,12 @@ export default function Admin() {
         >
           Search Banned Users
         </button>
+        <button
+          onClick={() => router.push("/admin/approveResponses")}
+          className="bg-[var(--brand)] px-4 py-1 font-bold rounded-md border border-[var(--brand)] hover:bg-transparent transition-all duration-200]"
+        >
+          Approve Responses
+        </button>
       </div>
     </div>
   );

@@ -52,7 +52,7 @@ export default function ApproveResponses() {
         loader={
           <Loading className="flex items-center justify-center mt-[10vh]" />
         }
-        className="flex flex-col mt-[30vh] items-center"
+        className="flex flex-col mt-[30vh] gap-8 items-center"
       >
         {responses.map((response) => (
           <div
