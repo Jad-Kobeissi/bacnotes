@@ -8,7 +8,7 @@ import User from "./user-solid-full";
 import Link from "next/link";
 function Nav() {
   return (
-    <nav className="fixed flex items-center justify-between w-screen px-10">
+    <nav className="fixed flex items-center gap-4 justify-between w-screen min-[450px]:px-10">
       <Link
         href={"#home"}
         className="text-[var(--foreground)] text-[1.5rem] font-bold"
@@ -74,7 +74,7 @@ function Home() {
       <img
         src="/notes.png"
         alt="Bacnotes picture"
-        className="w-[30rem] aspect-square"
+        className="w-[30rem]"
       />
     </motion.div>
   );
